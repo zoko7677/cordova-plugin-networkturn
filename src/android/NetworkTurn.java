@@ -58,10 +58,10 @@ public class NetworkTurn extends CordovaPlugin {
             CallbackContext callback) throws JSONException {
 
         if ( action.equalsIgnoreCase("wifi-enabled") ) {            
-	     setWifiStatus(1);
-	     PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, isDisabled);
+		    setWifiStatus(1);
+			PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, isDisabled);
             pluginResult.setKeepCallback(true);
-            callbackContext.sendPluginResult(pluginResult);			
+            callback.sendPluginResult(pluginResult);			
             return true;
         } 
 		
@@ -83,9 +83,16 @@ public class NetworkTurn extends CordovaPlugin {
     }
 	
 	/**
-     * Enable the background mode.
+     * Enable the Wifi mode.
      */
     private void setWifiStatus(int active) {
+        isDisabled = 1;        
+    }
+	
+	/**
+     * Enable the Mobile data mode.
+     */
+    private void setMobileDataStatus(int active) {
         isDisabled = 1;        
     }	
 }
