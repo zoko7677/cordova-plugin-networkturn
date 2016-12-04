@@ -33,6 +33,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.SupplicantState;
 import android.content.Context;
 import android.util.Log;
+import android.net.ConnectivityManager;
 
 
 public class WifiWizard extends CordovaPlugin {
@@ -49,6 +50,7 @@ public class WifiWizard extends CordovaPlugin {
     private static final String IS_WIFI_ENABLED = "isWifiEnabled";
     private static final String SET_WIFI_ENABLED = "setWifiEnabled";
     private static final String TAG = "WifiWizard";
+	private static final String LOG_TAG = "WifiStatus";
 
     private WifiManager wifiManager;
     private CallbackContext callbackContext;
@@ -582,7 +584,7 @@ public class WifiWizard extends CordovaPlugin {
         try {
             ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             Method method = connectivityManager.getClass().getMethod("getMobileDataEnabled");
-			isEnabled = method.invoke(connectivityManager);
+			Boolean isEnabled = method.invoke(connectivityManager);
 			callbackContext.success(isEnabled ? "1" : "0");
             return (Boolean) isEnabled;
         } catch (Exception e) {
@@ -598,7 +600,7 @@ public class WifiWizard extends CordovaPlugin {
      */
     public void setMobileDataEnabled(CallbackContext callbackContext, JSONArray data) {
         try {
-			enabled = data.getString(0);
+			String enabled = data.getString(0);
             ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             Method method = connectivityManager.getClass().getMethod("setMobileDataEnabled", boolean.class);
             method.invoke(connectivityManager, status.equals("true"));
