@@ -34,7 +34,6 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
-import android.net.wifi.WifiManager;
 
 import java.util.Locale;
 
@@ -74,7 +73,7 @@ public class NetworkTurn extends CordovaPlugin {
      * Enable the Wifi mode.
      */
     private void setWifiStatus(int active) {
-		WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+		WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 		boolean wifiEnabled = wifiManager.isWifiEnabled();
 		if(wifiEnabled == true)
 	        isDisabled = 1;        
