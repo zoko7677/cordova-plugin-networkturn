@@ -60,7 +60,7 @@ public class NetworkTurn extends CordovaPlugin {
             CallbackContext callback) throws JSONException {
 
          if (action.equals("wifi-enabled")) {           
-            connectionType = "hello";          
+            String connectionType = "hello";           
             PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, connectionType);
             pluginResult.setKeepCallback(true);
             callback.sendPluginResult(pluginResult);
