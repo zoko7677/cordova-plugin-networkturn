@@ -16,7 +16,7 @@
        specific language governing permissions and limitations
        under the License.
 */
-package org.apache.cordova.networkinformation;
+package thidinet.cordova.networkturn;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -41,6 +41,8 @@ public class NetworkTurn extends CordovaPlugin {
 
     // Flag indicates if the plugin is enabled or disabled
     private int isDisabled = 0;
+	
+	private CallbackContext connectionCallbackContext;
 
     /**
      * Executes the request.
@@ -57,26 +59,11 @@ public class NetworkTurn extends CordovaPlugin {
     public boolean execute(String action, JSONArray args,
             CallbackContext callback) throws JSONException {
 
-        if ( action.equalsIgnoreCase("wifi-enabled") ) {            
-		    setWifiStatus(1);
-			PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, isDisabled);
+         if (action.equals("wifi-enabled")) {           
+            connectionType = "hello";          
+            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, connectionType);
             pluginResult.setKeepCallback(true);
-            callback.sendPluginResult(pluginResult);			
-            return true;
-        } 
-		
-		if ( action.equalsIgnoreCase("wifi-disabled") ) {            
-		    setWifiStatus(0);
-            return true;
-        } 
-		
-		if ( action.equalsIgnoreCase("3G-enabled") ) {
-			setMobileDataStatus(1);
-            return true;
-        }
-		
-		if ( action.equalsIgnoreCase("3G-disabled") ) {
-			setMobileDataStatus(0);
+            callback.sendPluginResult(pluginResult);
             return true;
         }
         return false;
