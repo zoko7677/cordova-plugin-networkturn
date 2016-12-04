@@ -40,7 +40,7 @@ import java.util.Locale;
 public class NetworkTurn extends CordovaPlugin {
 
     // Flag indicates if the plugin is enabled or disabled
-    private boolean isDisabled = 0;
+    private int isDisabled = 0;
 
     /**
      * Executes the request.
