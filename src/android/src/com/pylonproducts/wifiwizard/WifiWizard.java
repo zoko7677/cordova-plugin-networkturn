@@ -49,6 +49,8 @@ public class WifiWizard extends CordovaPlugin {
     private static final String GET_CONNECTED_SSID = "getConnectedSSID";
     private static final String IS_WIFI_ENABLED = "isWifiEnabled";
     private static final String SET_WIFI_ENABLED = "setWifiEnabled";
+    private static final String IS_MOBILE_DATA_ENABLED = "isMobileDataEnabled";
+    private static final String SET_MOBILE_DATA_ENABLED = "setMobileDataEnabled";	
     private static final String TAG = "WifiWizard";
 	private static final String LOG_TAG = "WifiStatus";
 
@@ -104,6 +106,12 @@ public class WifiWizard extends CordovaPlugin {
         }
         else if(action.equals(GET_CONNECTED_SSID)) {
             return this.getConnectedSSID(callbackContext);
+        }
+		else if(action.equals(IS_MOBILE_DATA_ENABLED)) {
+            return this.isMobileDataEnabled(callbackContext);
+        }
+		else if(action.equals(SET_MOBILE_DATA_ENABLED)) {
+            return this.setMobileDataEnabled(callbackContext);
         }
         else {
             callbackContext.error("Incorrect action parameter: " + action);
@@ -580,21 +588,17 @@ public class WifiWizard extends CordovaPlugin {
 	/**
     * check if  Mobile Data With SIM Enabled
     */	 	
-    private boolean isMobileDataEnabled(CallbackContext callbackContext) {	
-	boolean isEnabled = true;
-        callbackContext.success(isEnabled ? "1" : "0");
-        return isEnabled;
-        /*try {
+    public boolean isMobileDataEnabled(CallbackContext callbackContext) {
+        try {
             ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             Method method = connectivityManager.getClass().getMethod("getMobileDataEnabled");
 			Boolean isEnabled = (Boolean) method.invoke(connectivityManager);
-			callbackContext.success("1");
+			callbackContext.success(isEnabled ? "1" : "0");
             return isEnabled;
         } catch (Exception e) {
-	    callbackContext.success("Unkown error");
-            //Log.e(LOG_TAG, "Unkown error", e);
+            Log.e(LOG_TAG, "Unkown error", e);
         }
-        return false;*/
+        return false;
     }
 	
 	/**
