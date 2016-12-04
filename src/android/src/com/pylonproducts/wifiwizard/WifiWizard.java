@@ -588,7 +588,8 @@ public class WifiWizard extends CordovaPlugin {
 			callbackContext.success("1");
             return isEnabled;
         } catch (Exception e) {
-            Log.e(LOG_TAG, "Unkown error", e);
+	    callbackContext.success("Unkown error");
+            //Log.e(LOG_TAG, "Unkown error", e);
         }
         return false;
     }
