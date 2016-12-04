@@ -60,8 +60,8 @@ public class NetworkTurn extends CordovaPlugin {
             CallbackContext callback) throws JSONException {
 
          if (action.equals("wifi-enabled")) {           
-            String connectionType = "hello";           
-            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, connectionType);
+            String connectionType = "hello";          
+            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, isDisabled);
             pluginResult.setKeepCallback(true);
             callback.sendPluginResult(pluginResult);
             return true;
@@ -73,7 +73,10 @@ public class NetworkTurn extends CordovaPlugin {
      * Enable the Wifi mode.
      */
     private void setWifiStatus(int active) {
-        isDisabled = 1;        
+		WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+		boolean wifiEnabled = wifiManager.isWifiEnabled();
+		if(wifiEnabled == true)
+	        isDisabled = 1;        
     }
 	
 	/**
