@@ -618,5 +618,6 @@ public class WifiWizard extends CordovaPlugin {
             Log.e(LOG_TAG, "Unkown error.", e);
 			return false;
         }
+		return false;
     }
 }
