@@ -297,13 +297,11 @@ var WifiWizard = {
      * @param 	win	callback function
      * @param 	fail
      */
-    isMobileDataEnabled: function(win, fail) {
-	alert(typeof win);
+    isMobileDataEnabled: function(win, fail) {	
         if (typeof win != "function") {
             console.log("isMobileDataEnabled first parameter must be a function to handle Mobile Data status.");
             return;
-        }
- 	alert(win);
+        } 	
         cordova.exec(
             // Cordova can only return strings to JS, and the underlying plugin
             // sends a "1" for true and "0" for false.
