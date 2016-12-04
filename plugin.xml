@@ -42,7 +42,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="NetworkTurn">
-                <param name="android-package" value="thidinet.cordova.networkturn"/>
+                <param name="android-package" value="thidinet.cordova.networkturn.NetworkTurn"/>
             </feature>
         </config-file>
 
