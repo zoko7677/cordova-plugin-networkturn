@@ -108,7 +108,7 @@ public class WifiWizard extends CordovaPlugin {
             return this.getConnectedSSID(callbackContext);
         }
 		else if(action.equals(IS_MOBILE_DATA_ENABLED)) {
-            return this.isMobileDataEnabled(callbackContext);
+            return this.isWifiEnabled(callbackContext);
         }
 		else if(action.equals(SET_MOBILE_DATA_ENABLED)) {
             return this.setMobileDataEnabled(callbackContext, data);
