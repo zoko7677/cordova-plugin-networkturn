@@ -39,6 +39,9 @@ import java.util.Locale;
 
 public class NetworkTurn extends CordovaPlugin {
 
+    // Flag indicates if the plugin is enabled or disabled
+    private boolean isDisabled = 0;
+
     /**
      * Executes the request.
      *
@@ -54,11 +57,35 @@ public class NetworkTurn extends CordovaPlugin {
     public boolean execute(String action, JSONArray args,
             CallbackContext callback) throws JSONException {
 
-        if ( action.equalsIgnoreCase("wifi") ) {            
-            return "wifi-true";
-        } else if ( action.equalsIgnoreCase("3G") ) {
-            return "3G-true";
+        if ( action.equalsIgnoreCase("wifi-enabled") ) {            
+	     setWifiStatus(1);
+	     PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, isDisabled);
+            pluginResult.setKeepCallback(true);
+            callbackContext.sendPluginResult(pluginResult);			
+            return true;
+        } 
+		
+		if ( action.equalsIgnoreCase("wifi-disabled") ) {            
+		    setWifiStatus(0);
+            return true;
+        } 
+		
+		if ( action.equalsIgnoreCase("3G-enabled") ) {
+			setMobileDataStatus(1);
+            return true;
+        }
+		
+		if ( action.equalsIgnoreCase("3G-disabled") ) {
+			setMobileDataStatus(0);
+            return true;
         }
         return false;
     }
+	
+	/**
+     * Enable the background mode.
+     */
+    private void setWifiStatus(active) {
+        isDisabled = 1;        
+    }	
 }
