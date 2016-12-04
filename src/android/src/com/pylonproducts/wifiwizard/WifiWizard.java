@@ -111,7 +111,7 @@ public class WifiWizard extends CordovaPlugin {
             return this.isMobileDataEnabled(callbackContext);
         }
 		else if(action.equals(SET_MOBILE_DATA_ENABLED)) {
-            return this.setMobileDataEnabled(callbackContext);
+            return this.setMobileDataEnabled(callbackContext, data);
         }
         else {
             callbackContext.error("Incorrect action parameter: " + action);
