@@ -85,7 +85,7 @@ public class NetworkTurn extends CordovaPlugin {
 	/**
      * Enable the background mode.
      */
-    private void setWifiStatus(active) {
+    private void setWifiStatus(int active) {
         isDisabled = 1;        
     }	
 }
