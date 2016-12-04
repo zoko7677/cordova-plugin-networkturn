@@ -300,7 +300,7 @@ var WifiWizard = {
     isMobileDataEnabled: function(win, fail) {
 	alert(win);
         if (typeof win != "function") {
-            console.log("isMobileDataEnabled first parameter must be a function to handle Mobile Data status.");
+            alert("isMobileDataEnabled first parameter must be a function to handle Mobile Data status.");
             return;
         }
         cordova.exec(
