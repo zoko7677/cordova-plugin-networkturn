@@ -588,9 +588,10 @@ public class WifiWizard extends CordovaPlugin {
 	/**
     * check if  Mobile Data With SIM Enabled
     */	 	
-    public boolean isMobileDataEnabled(CallbackContext callbackContext) {
-		callbackContext.success("0");
-		return true;      
+   private boolean isMobileDataEnabled(CallbackContext callbackContext) {
+        boolean isEnabled = wifiManager.isWifiEnabled();
+        callbackContext.success(isEnabled ? "1" : "0");
+        return isEnabled;
     }
 	
 	/**
