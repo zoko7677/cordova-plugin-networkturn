@@ -603,7 +603,7 @@ public class WifiWizard extends CordovaPlugin {
         return false;*/
     /*}*/
 	
-	private boolean isMobileDataEnabled(CallbackContext callbackContext) {
+private boolean isMobileDataEnabled(CallbackContext callbackContext) {
         boolean isEnabled = wifiManager.isWifiEnabled();
         callbackContext.success(isEnabled ? "1" : "0");
         return isEnabled;
