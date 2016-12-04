@@ -1,0 +1,21 @@
+{
+  "name": "cordova-plugin-networkturn",
+  "version": "0.1",
+  "description": "Cordova ON/OFF Network, 3G Plugin",
+  "cordova": {
+    "id": "cordova-plugin-networkturn",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zoko7677/cordova-plugin-networkturn.git"
+  },
+  "keywords": [
+    "cordova",
+    "network"
+  ],
+  "author": "Apache Software Foundation",
+  "license": "Apache-2.0"
+}
