@@ -18,8 +18,8 @@
  *
 */
 
-var exec = require('cordova/exec');
+var exec    = require('cordova/exec');	
 
 exports.networkWifi = function(successCallback, errorCallback) {
-    exec(successCallback, errorCallback, "NetworkTurn", "wifi", []);
+    exec(successCallback, errorCallback, "NetworkTurn", "wifi-enabled", []);
 };
