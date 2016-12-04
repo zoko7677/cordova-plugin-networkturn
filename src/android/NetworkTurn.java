@@ -74,7 +74,7 @@ public class NetworkTurn extends CordovaPlugin {
      * Enable the Wifi mode.
      */
     private void setWifiStatus(int active) {
-		WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+		WifiManager wifiManager = (WifiManager) Context.getActivity().getSystemService(Context.WIFI_SERVICE);
 		boolean wifiEnabled = wifiManager.isWifiEnabled();
 		if(wifiEnabled == true)
 	        isDisabled = 1;        
