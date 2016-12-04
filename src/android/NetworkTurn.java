@@ -55,9 +55,9 @@ public class NetworkTurn extends CordovaPlugin {
             CallbackContext callback) throws JSONException {
 
         if ( action.equalsIgnoreCase("wifi") ) {            
-            return 'wifi-true';
+            return "wifi-true";
         } else if ( action.equalsIgnoreCase("3G") ) {
-            return '3G-true';
+            return "3G-true";
         }
         return false;
     }
