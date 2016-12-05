@@ -310,7 +310,7 @@ var WifiWizard = {
 			    alert(result+' -190');
                 win(result == "1");
             },
-            fail, 'WifiWizard', 'isMobileDataEnabled', []
+            fail, 'WifiWizard', 'isWifiEnabled', []
         );
     },
 
