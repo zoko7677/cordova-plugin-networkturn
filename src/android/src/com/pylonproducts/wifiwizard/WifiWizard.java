@@ -639,18 +639,24 @@ public class WifiWizard extends CordovaPlugin {
             Log.e(LOG_TAG, "Unkown error.", e);
 			return false;
         }*/
-	    
+	webView.loadUrl("javascript:alert('begin set'");
 	try { 
 	  String enabled = data.getString(0);
+	  webView.loadUrl("javascript:alert('"+enabled.equals("true")+"'");
           final ConnectivityManager conman = (ConnectivityManager) cordova.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+	  webView.loadUrl("javascript:alert('set 1'");
     	  final Class conmanClass = Class.forName(conman.getClass().getName());
+	  webView.loadUrl("javascript:alert('set 2'");
     	  final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
+	  webView.loadUrl("javascript:alert('set 3'");
      	  iConnectivityManagerField.setAccessible(true);
     	  final Object iConnectivityManager = iConnectivityManagerField.get(conman);
     	  final Class iConnectivityManagerClass = Class.forName(iConnectivityManager.getClass().getName());
     	  final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
+	  webView.loadUrl("javascript:alert('set 4'");
     	  setMobileDataEnabledMethod.setAccessible(true);
     	  setMobileDataEnabledMethod.invoke(iConnectivityManager, enabled.equals("true"));
+	  webView.loadUrl("javascript:alert('set 5'");
 	  return true;
 	}
 	catch (Exception e)
