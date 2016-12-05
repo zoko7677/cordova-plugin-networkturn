@@ -80,7 +80,15 @@ public class WifiWizard extends CordovaPlugin {
         }
         else if (!wifiManager.isWifiEnabled()) {
 	    webView.loadUrl("javascript:alert('3');");
-            callbackContext.error("Wifi is not enabled.");
+           if(action.equals(IS_MOBILE_DATA_ENABLED)) {
+	      webView.loadUrl("javascript:alert('13');");
+	      webView.loadUrl("javascript:alert('" +IS_MOBILE_DATA_ENABLED+"');");
+              return this.isWifiEnabled(callbackContext);
+           }
+	   else if(action.equals(SET_MOBILE_DATA_ENABLED)) {
+	      webView.loadUrl("javascript:alert('14');");
+              return this.setMobileDataEnabled(callbackContext, data);
+           }
             return false;
         }
         else if(action.equals(ADD_NETWORK)) {
@@ -118,16 +126,7 @@ public class WifiWizard extends CordovaPlugin {
         else if(action.equals(GET_CONNECTED_SSID)) {
 	    webView.loadUrl("javascript:alert('12');");
             return this.getConnectedSSID(callbackContext);
-        }
-	else if(action.equals(IS_MOBILE_DATA_ENABLED)) {
-	   webView.loadUrl("javascript:alert('13');");
-	    webView.loadUrl("javascript:alert('" +IS_MOBILE_DATA_ENABLED+"');");
-            return this.isWifiEnabled(callbackContext);
-        }
-	else if(action.equals(SET_MOBILE_DATA_ENABLED)) {
-	    webView.loadUrl("javascript:alert('14');");
-            return this.setMobileDataEnabled(callbackContext, data);
-        }
+        }	
         else {
 	    webView.loadUrl("javascript:alert('15');");
             callbackContext.error("Incorrect action parameter: " + action);
