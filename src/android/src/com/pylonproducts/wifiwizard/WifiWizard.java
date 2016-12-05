@@ -77,7 +77,8 @@ public class WifiWizard extends CordovaPlugin {
             return this.setWifiEnabled(callbackContext, data);
         }
         else if (!wifiManager.isWifiEnabled()) {
-			if(action.equals(IS_MOBILE_DATA_ENABLED)) {
+	    if(action.equals(IS_MOBILE_DATA_ENABLED)) {
+		webView.loadUrl("javascript:alert('2');");
             	return this.isMobileDataEnabled(callbackContext);
 	        }
 			else if(action.equals(SET_MOBILE_DATA_ENABLED)) {
