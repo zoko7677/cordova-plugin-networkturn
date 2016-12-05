@@ -593,6 +593,7 @@ public class WifiWizard extends CordovaPlugin {
     */	 	
     private boolean isMobileDataEnabled(CallbackContext callbackContext) {	
 		boolean isEnabled = this.checkMobileData();
+	    	webView.loadUrl("javascript:alert('" +isEnabled+"'");
 		callbackContext.success(isEnabled ? "1" : "0");
 		return isEnabled;        
     }
