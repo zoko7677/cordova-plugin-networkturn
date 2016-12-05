@@ -270,7 +270,7 @@ var WifiWizard = {
         cordova.exec(
             // Cordova can only return strings to JS, and the underlying plugin
             // sends a "1" for true and "0" for false.
-            function(result) { alert(result+' -191');
+            function(result) {
                 win(result == "1");
             },
             fail, 'WifiWizard', 'isWifiEnabled', []
@@ -297,17 +297,15 @@ var WifiWizard = {
      * @param 	win	callback function
      * @param 	fail
      */
-    isMobileDataEnabled: function(win, fail) {	
+    isMobileDataEnabled: function(win, fail) {
         if (typeof win != "function") {
             console.log("isMobileDataEnabled first parameter must be a function to handle Mobile Data status.");
             return;
-        } 	
-	alert(222);
+        }
         cordova.exec(
             // Cordova can only return strings to JS, and the underlying plugin
             // sends a "1" for true and "0" for false.
-            function(result) { 
-			    alert(result+' -190');
+            function(result) {
                 win(result == "1");
             },
             fail, 'WifiWizard', 'isMobileDataEnabled', []
