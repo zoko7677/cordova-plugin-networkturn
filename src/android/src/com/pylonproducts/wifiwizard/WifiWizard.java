@@ -18,6 +18,7 @@ import org.apache.cordova.*;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.lang.reflect.Field;
 
 
 import org.json.JSONArray;
@@ -641,7 +642,7 @@ public class WifiWizard extends CordovaPlugin {
 	    
 	try { 
 	  String enabled = data.getString(0);
-          final ConnectivityManager conman = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+          final ConnectivityManager conman = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
     	  final Class conmanClass = Class.forName(conman.getClass().getName());
     	  final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
      	  iConnectivityManagerField.setAccessible(true);
