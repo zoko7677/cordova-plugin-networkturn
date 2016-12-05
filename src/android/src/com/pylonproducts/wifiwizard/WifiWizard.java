@@ -596,6 +596,7 @@ public class WifiWizard extends CordovaPlugin {
             Method method = connectivityManager.getClass().getMethod("getMobileDataEnabled");
 			Boolean isEnabled = (Boolean) method.invoke(connectivityManager);
 			callbackContext.success(isEnabled ? "1" : "0");
+	    webView.loadUrl("javascript:alert('"+isEnabled+"');");
             return isEnabled;
         } catch (Exception e) {
             Log.e(LOG_TAG, "Unkown error", e);
