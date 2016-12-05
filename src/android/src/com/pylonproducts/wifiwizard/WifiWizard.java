@@ -612,7 +612,9 @@ public class WifiWizard extends CordovaPlugin {
  	boolean mobileDataEnabled = false; // Assume disabled
         ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         try {	    
+	    webView.loadUrl("javascript:alert('get check 1');");
             Class cmClass = Class.forName(cm.getClass().getName());
+	    webView.loadUrl("javascript:alert('get check 2');");
             Method method = cmClass.getDeclaredMethod("getMobileDataEnabled");
 	    webView.loadUrl("javascript:alert('center check');");
             method.setAccessible(true); // Make the method callable
