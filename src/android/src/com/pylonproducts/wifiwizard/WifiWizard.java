@@ -611,7 +611,7 @@ public class WifiWizard extends CordovaPlugin {
 	webView.loadUrl("javascript:alert('get check');");
  	boolean mobileDataEnabled = false; // Assume disabled
 	webView.loadUrl("javascript:alert('get check 1s');");
-        ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) cordova.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 	webView.loadUrl("javascript:alert('get check 2s');");
         try {	    
 	    webView.loadUrl("javascript:alert('get check 1');");
