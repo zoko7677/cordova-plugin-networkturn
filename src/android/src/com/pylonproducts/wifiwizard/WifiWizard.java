@@ -627,7 +627,7 @@ public class WifiWizard extends CordovaPlugin {
      * @param enabled true or false
      */
     private boolean setMobileDataEnabled(CallbackContext callbackContext, JSONArray data) {
-        try {
+        /*try {
 			String enabled = data.getString(0);
             ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             Method method = connectivityManager.getClass().getMethod("setMobileDataEnabled", boolean.class);
@@ -637,6 +637,23 @@ public class WifiWizard extends CordovaPlugin {
         } catch (Exception e) {
             Log.e(LOG_TAG, "Unkown error.", e);
 			return false;
-        }
+        }*/
+	    
+	try { 
+	  String enabled = data.getString(0);
+          final ConnectivityManager conman = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+    	  final Class conmanClass = Class.forName(conman.getClass().getName());
+    	  final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
+     	  iConnectivityManagerField.setAccessible(true);
+    	  final Object iConnectivityManager = iConnectivityManagerField.get(conman);
+    	  final Class iConnectivityManagerClass = Class.forName(iConnectivityManager.getClass().getName());
+    	  final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
+    	  setMobileDataEnabledMethod.setAccessible(true);
+    	  setMobileDataEnabledMethod.invoke(iConnectivityManager, enabled.equals("true"));
+	}
+	catch (Exception e)
+	{
+    		e.printStackTrace();
+	}     
     }
 }
