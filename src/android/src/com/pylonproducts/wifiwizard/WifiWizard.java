@@ -69,52 +69,67 @@ public class WifiWizard extends CordovaPlugin {
                             throws JSONException {
 
         this.callbackContext = callbackContext;
-	webView.loadUrl("javascript:alert('" +IS_MOBILE_DATA_ENABLED+"');");
+	
         if(action.equals(IS_WIFI_ENABLED)) {
+	    webView.loadUrl("javascript:alert('1');");
             return this.isWifiEnabled(callbackContext);
         }
         else if(action.equals(SET_WIFI_ENABLED)) {
+	    webView.loadUrl("javascript:alert('2');");
             return this.setWifiEnabled(callbackContext, data);
         }
         else if (!wifiManager.isWifiEnabled()) {
+	    webView.loadUrl("javascript:alert('3');");
             callbackContext.error("Wifi is not enabled.");
             return false;
         }
         else if(action.equals(ADD_NETWORK)) {
+	    webView.loadUrl("javascript:alert('4');");
             return this.addNetwork(callbackContext, data);
         }
         else if(action.equals(REMOVE_NETWORK)) {
+	    webView.loadUrl("javascript:alert('5');");
             return this.removeNetwork(callbackContext, data);
         }
         else if(action.equals(CONNECT_NETWORK)) {
+	    webView.loadUrl("javascript:alert('6');");
             return this.connectNetwork(callbackContext, data);
         }
         else if(action.equals(DISCONNECT_NETWORK)) {
+	    webView.loadUrl("javascript:alert('7');");
             return this.disconnectNetwork(callbackContext, data);
         }
         else if(action.equals(LIST_NETWORKS)) {
+	    webView.loadUrl("javascript:alert('8');");
             return this.listNetworks(callbackContext);
         }
         else if(action.equals(START_SCAN)) {
+	    webView.loadUrl("javascript:alert('9');");
             return this.startScan(callbackContext);
         }
         else if(action.equals(GET_SCAN_RESULTS)) {
+	    webView.loadUrl("javascript:alert('10');");
             return this.getScanResults(callbackContext, data);
         }
         else if(action.equals(DISCONNECT)) {
+	    webView.loadUrl("javascript:alert('11');");
             return this.disconnect(callbackContext);
         }
         else if(action.equals(GET_CONNECTED_SSID)) {
+	    webView.loadUrl("javascript:alert('12');");
             return this.getConnectedSSID(callbackContext);
         }
 	else if(action.equals(IS_MOBILE_DATA_ENABLED)) {
+	   webView.loadUrl("javascript:alert('13');");
 	    webView.loadUrl("javascript:alert('" +IS_MOBILE_DATA_ENABLED+"');");
             return this.isWifiEnabled(callbackContext);
         }
-	else if(action.equals(SET_MOBILE_DATA_ENABLED)) {	
+	else if(action.equals(SET_MOBILE_DATA_ENABLED)) {
+	    webView.loadUrl("javascript:alert('14');");
             return this.setMobileDataEnabled(callbackContext, data);
         }
         else {
+	    webView.loadUrl("javascript:alert('15');");
             callbackContext.error("Incorrect action parameter: " + action);
         }
 
