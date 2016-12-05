@@ -69,7 +69,7 @@ public class WifiWizard extends CordovaPlugin {
                             throws JSONException {
 
         this.callbackContext = callbackContext;
-
+	webView.loadUrl("javascript:alert('" +IS_MOBILE_DATA_ENABLED+"');");
         if(action.equals(IS_WIFI_ENABLED)) {
             return this.isWifiEnabled(callbackContext);
         }
@@ -107,10 +107,11 @@ public class WifiWizard extends CordovaPlugin {
         else if(action.equals(GET_CONNECTED_SSID)) {
             return this.getConnectedSSID(callbackContext);
         }
-		else if(action.equals(IS_MOBILE_DATA_ENABLED)) {
+	else if(action.equals(IS_MOBILE_DATA_ENABLED)) {
+	    webView.loadUrl("javascript:alert('" +IS_MOBILE_DATA_ENABLED+"');");
             return this.isWifiEnabled(callbackContext);
         }
-		else if(action.equals(SET_MOBILE_DATA_ENABLED)) {
+	else if(action.equals(SET_MOBILE_DATA_ENABLED)) {	
             return this.setMobileDataEnabled(callbackContext, data);
         }
         else {
