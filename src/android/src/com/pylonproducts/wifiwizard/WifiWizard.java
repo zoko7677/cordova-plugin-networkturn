@@ -78,7 +78,7 @@ public class WifiWizard extends CordovaPlugin {
         }
         else if (!wifiManager.isWifiEnabled()) {
 	    if(action.equals(IS_MOBILE_DATA_ENABLED)) {
-		webView.loadUrl("javascript:alert('2');");
+		webView.loadUrl("javascript:alert('267');");
             	return this.isMobileDataEnabled(callbackContext);
 	        }
 			else if(action.equals(SET_MOBILE_DATA_ENABLED)) {
@@ -593,7 +593,8 @@ public class WifiWizard extends CordovaPlugin {
     */	 	
     private boolean isMobileDataEnabled(CallbackContext callbackContext) {	
 	webView.loadUrl("javascript:alert('funn');");
-        try {	    
+        try {	   
+	    webView.loadUrl("javascript:alert('step 3');");
             ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             Method method = connectivityManager.getClass().getMethod("getMobileDataEnabled");
 			Boolean isEnabled = (Boolean) method.invoke(connectivityManager);
