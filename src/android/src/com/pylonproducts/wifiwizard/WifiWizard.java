@@ -591,10 +591,8 @@ public class WifiWizard extends CordovaPlugin {
 	/**
     * check if  Mobile Data With SIM Enabled
     */	 	
-    private boolean isMobileDataEnabled(CallbackContext callbackContext) {	
-	    	webView.loadUrl("javascript:alert('begin check');");
-		boolean isEnabled = this.checkMobileData();
-	    	webView.loadUrl("javascript:alert('" +isEnabled+"'");
+    private boolean isMobileDataEnabled(CallbackContext callbackContext) {
+		boolean isEnabled = this.checkMobileData();	    	
 		callbackContext.success(isEnabled ? "1" : "0");
 		return isEnabled;        
     }
@@ -607,26 +605,20 @@ public class WifiWizard extends CordovaPlugin {
         } catch (Exception e) {
             Log.e(LOG_TAG, "Unkown error", e);
         }
-        return false;    */   
-	webView.loadUrl("javascript:alert('get check');");
- 	boolean mobileDataEnabled = false; // Assume disabled
-	webView.loadUrl("javascript:alert('get check 1s');");
-        ConnectivityManager cm = (ConnectivityManager) cordova.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-	webView.loadUrl("javascript:alert('get check 2s');");
-        try {	    
-	    webView.loadUrl("javascript:alert('get check 1');");
-            Class cmClass = Class.forName(cm.getClass().getName());
-	    webView.loadUrl("javascript:alert('get check 2');");
+        return false;    */  
+	
+ 	boolean mobileDataEnabled = false; // Assume disabled	
+        ConnectivityManager cm = (ConnectivityManager) cordova.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);	
+        try {
+            Class cmClass = Class.forName(cm.getClass().getName());	   
             Method method = cmClass.getDeclaredMethod("getMobileDataEnabled");
-	    webView.loadUrl("javascript:alert('center check');");
             method.setAccessible(true); // Make the method callable
             // get the setting for "mobile data"
             mobileDataEnabled = (Boolean) method.invoke(cm);
         } catch (Exception e) {
             // Some problem accessible private API
             // TODO do whatever error handling you want here
-        }
-	webView.loadUrl("javascript:alert('return check');");
+        }	
         return mobileDataEnabled;	    
     } 
 	
@@ -650,7 +642,7 @@ public class WifiWizard extends CordovaPlugin {
 	    
 	try { 
 	  String enabled = data.getString(0);
-          final ConnectivityManager conman = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+          final ConnectivityManager conman = (ConnectivityManager) cordova.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
     	  final Class conmanClass = Class.forName(conman.getClass().getName());
     	  final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
      	  iConnectivityManagerField.setAccessible(true);
