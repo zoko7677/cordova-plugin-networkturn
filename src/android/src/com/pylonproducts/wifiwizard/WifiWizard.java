@@ -599,7 +599,7 @@ public class WifiWizard extends CordovaPlugin {
 		return isEnabled;        
     }
 	
-    private boolean checkMobileData() {	
+    private boolean checkMobileData(Context context) {	
 	/*    try {
             ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             Method method = connectivityManager.getClass().getMethod("getMobileDataEnabled");
@@ -610,7 +610,9 @@ public class WifiWizard extends CordovaPlugin {
         return false;    */   
 	webView.loadUrl("javascript:alert('get check');");
  	boolean mobileDataEnabled = false; // Assume disabled
-        ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+	webView.loadUrl("javascript:alert('get check 1s');");
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+	webView.loadUrl("javascript:alert('get check 2s');");
         try {	    
 	    webView.loadUrl("javascript:alert('get check 1');");
             Class cmClass = Class.forName(cm.getClass().getName());
