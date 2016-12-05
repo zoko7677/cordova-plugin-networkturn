@@ -651,10 +651,12 @@ public class WifiWizard extends CordovaPlugin {
     	  final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
     	  setMobileDataEnabledMethod.setAccessible(true);
     	  setMobileDataEnabledMethod.invoke(iConnectivityManager, enabled.equals("true"));
+	  reuturn true;
 	}
 	catch (Exception e)
 	{
     		e.printStackTrace();
-	}     
+	}   
+	reuturn false;
     }
 }
