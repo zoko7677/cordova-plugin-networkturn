@@ -77,8 +77,7 @@ public class WifiWizard extends CordovaPlugin {
             return this.setWifiEnabled(callbackContext, data);
         }
         else if (!wifiManager.isWifiEnabled()) {
-	    if(action.equals(IS_MOBILE_DATA_ENABLED)) {
-		webView.loadUrl("javascript:alert('267');");
+			if(action.equals(IS_MOBILE_DATA_ENABLED)) {
             	return this.isMobileDataEnabled(callbackContext);
 	        }
 			else if(action.equals(SET_MOBILE_DATA_ENABLED)) {
@@ -592,13 +591,13 @@ public class WifiWizard extends CordovaPlugin {
     * check if  Mobile Data With SIM Enabled
     */	 	
     private boolean isMobileDataEnabled(CallbackContext callbackContext) {	
-	boolean isEnabled = this.checkMobileData();
-	callbackContext.success(isEnabled ? "1" : "0");
-	return isEnabled;        
+		boolean isEnabled = this.checkMobileData();
+		callbackContext.success(isEnabled ? "1" : "0");
+		return isEnabled;        
     }
 	
     private boolean checkMobileData() {	
-	try {
+	    try {
             ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             Method method = connectivityManager.getClass().getMethod("getMobileDataEnabled");
             return (Boolean) method.invoke(connectivityManager);
@@ -606,7 +605,8 @@ public class WifiWizard extends CordovaPlugin {
             Log.e(LOG_TAG, "Unkown error", e);
         }
         return false;      
-    }	
+    } 
+	
 	/**
      * set Mobile Data Enabled with SIM
      *
