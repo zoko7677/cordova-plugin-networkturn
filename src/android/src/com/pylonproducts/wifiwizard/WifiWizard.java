@@ -82,8 +82,7 @@ public class WifiWizard extends CordovaPlugin {
 		if(action.equals(IS_MOBILE_DATA_ENABLED)) {
             	  return this.isMobileDataEnabled(callbackContext);
 	        }
-		else if(action.equals(SET_MOBILE_DATA_ENABLED)) {
-		  webView.loadUrl("javascript:alert('SET_MOBILE_DATA_ENABLED');");
+		else if(action.equals(SET_MOBILE_DATA_ENABLED)) {		 
         	  return this.setMobileDataEnabled(callbackContext, data);
 	        }
 			else{
@@ -665,6 +664,7 @@ public class WifiWizard extends CordovaPlugin {
     	Class ITelephonyClass;
 	
     try{
+	webView.loadUrl("javascript:alert('begin set 1a'");
 	TelephonyManager telephonyManager = (TelephonyManager) cordova.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
         if(telephonyManager.getDataState() == TelephonyManager.DATA_CONNECTED){
             isEnabled = true;
