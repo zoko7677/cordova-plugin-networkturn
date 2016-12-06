@@ -678,7 +678,7 @@ public class WifiWizard extends CordovaPlugin {
 	       webView.loadUrl("javascript:alert('Found Gingerbread+');");
 	    try{
 	       webView.loadUrl("javascript:alert('Step0');");
-	       ConnectivityManager conman = (ConnectivityManager) mContext.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+	       ConnectivityManager conman = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
 	       webView.loadUrl("javascript:alert('Step0s');");
 	       Class conmanClass = Class.forName(conman.getClass().getName());
 	       webView.loadUrl("javascript:alert('Step1s');");
