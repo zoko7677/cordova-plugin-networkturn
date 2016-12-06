@@ -49,7 +49,6 @@ import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import android.annotation.SdkConstant;
 import android.content.Context;
 import android.os.Binder;
 import android.os.Build.VERSION_CODES;
