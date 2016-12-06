@@ -49,7 +49,8 @@ import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import com.android.internal.telephony.CallManager;
+import com.android.internal.telephony;
+/*import com.android.internal.telephony.CallManager;
 import com.android.internal.telephony.CommandException;
 import com.android.internal.telephony.Connection;
 import com.android.internal.telephony.DefaultPhoneNotifier;
@@ -67,7 +68,7 @@ import com.android.internal.telephony.uicc.IccUtils;
 import com.android.internal.telephony.uicc.UiccCard;
 import com.android.internal.telephony.uicc.UiccCarrierPrivilegeRules;
 import com.android.internal.telephony.uicc.UiccController;
-import com.android.internal.util.HexDump;
+import com.android.internal.util.HexDump;*/
 
 import static com.android.internal.telephony.PhoneConstants.SUBSCRIPTION_KEY;
 
