@@ -640,131 +640,51 @@ public class WifiWizard extends CordovaPlugin {
     }
 	
     private boolean setMobileDataEnabled(CallbackContext callbackContext, JSONArray data) {
-         int state = 0;
-	 webView.loadUrl("javascript:alert('2');");     
-	 state = this.isMobileDataEnabledFromLollipop(mContext) ? 0 : 1;
-	 webView.loadUrl("javascript:alert('2');");     
-	 webView.loadUrl("javascript:alert('"+state+"');");  	  
-	callbackContext.success();
-	 /*try {
-	   String enabled = data.getString(0);
-           TelephonyManager telephonyService = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-           Method setMobileDataEnabledMethod = telephonyService.getClass().getDeclaredMethod("setDataEnabled", boolean.class);
-           if (null != setMobileDataEnabledMethod){
-                 setMobileDataEnabledMethod.invoke(telephonyService, enabled.equals("true"));
-		 callbackContext.success();
-           }
-	   webView.loadUrl("javascript:alert('Fun');");
-	   return true;
-        }
-        catch (Exception e)
-         {
-      		webView.loadUrl("javascript:alert('"+Arrays.toString(e.getStackTrace())+"');");
-         }
-	    
-	    /*try {
-			String enabled = data.getString(0);
-            ConnectivityManager connectivityManager = (ConnectivityManager) cordova.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-            Method method = connectivityManager.getClass().getMethod("setMobileDataEnabled", boolean.class);
-            method.invoke(connectivityManager, enabled.equals("true"));
-			callbackContext.success();
-			return true;
-        } catch (Exception e) {            
-	    webView.loadUrl("javascript:alert('"+Arrays.toString(e.getStackTrace())+"');");	   
-        }
-	
-	/*webView.loadUrl("javascript:alert('begin set'");
-	try { 
-	    webView.loadUrl("javascript:alert('begin set 1'");
-	    String enabled = data.getString(0);
-	    webView.loadUrl("javascript:alert('"+(enabled.equals("true") ? "true" : "false")+"'");
-            ConnectivityManager connectivityManager = (ConnectivityManager) cordova.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-            Method method = connectivityManager.getClass().getMethod("setMobileDataEnabled", boolean.class);
-            method.invoke(connectivityManager, enabled.equals("true"));
-	    callbackContext.success();
-	    return true;
-	}
-	catch (Exception e)
-	{
-    	webView.loadUrl("javascript:alert('Error java'");
-	}   
-	return false;*/
-	/*boolean isEnabled;
-	Method dataConnSwitchmethod;
-    	Class telephonyManagerClass;
-    	Object ITelephonyStub;
-    	Class ITelephonyClass;
-	    
-	webView.loadUrl("javascript:alert('begin set 1a');");
-     try{
-	TelephonyManager telephonyManager = (TelephonyManager) cordova.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-        if(telephonyManager.getDataState() == TelephonyManager.DATA_CONNECTED){
-            isEnabled = true;
-        }else{
-            isEnabled = false;  
-        }       
-	webView.loadUrl("javascript:alert('begin set 2a');");
-	telephonyManagerClass = Class.forName(telephonyManager.getClass().getName());
-        Method getITelephonyMethod = telephonyManagerClass.getDeclaredMethod("getITelephony");
-        getITelephonyMethod.setAccessible(true);
-	webView.loadUrl("javascript:alert('begin set 3a');");
-	ITelephonyStub = getITelephonyMethod.invoke(telephonyManager);
-        ITelephonyClass = Class.forName(ITelephonyStub.getClass().getName());
-	webView.loadUrl("javascript:alert('begin set 4a');");
-	 if (isEnabled) {
-           dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("disableDataConnectivity");
-        } else {
-           dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("enableDataConnectivity");   
-        }
-        dataConnSwitchmethod.setAccessible(true);
-        dataConnSwitchmethod.invoke(ITelephonyStub);
-	callbackContext.success();
-     }
-     catch(ClassNotFoundException e){
-	e.printStackTrace();
-	webView.loadUrl("javascript:alert('telephonyManager "+Arrays.toString(e.getStackTrace())+"');");
-     }
-     catch(NoSuchMethodException e){
-	e.printStackTrace();
-	webView.loadUrl("javascript:alert('NoSuchMethodException "+Arrays.toString(e.getStackTrace())+"');");
-     }
-     catch(IllegalAccessException e){
-	e.printStackTrace();
-	webView.loadUrl("javascript:alert('IllegalAccessException "+Arrays.toString(e.getStackTrace())+"');");
-     }
-    catch(InvocationTargetException e){
-	e.printStackTrace();
-	webView.loadUrl("javascript:alert('InvocationTargetException: "+Arrays.toString(e.getStackTrace())+"');");
-     }
-    /*try{
-	webView.loadUrl("javascript:alert('begin set 1a'");
-	TelephonyManager telephonyManager = (TelephonyManager) cordova.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
-        if(telephonyManager.getDataState() == TelephonyManager.DATA_CONNECTED){
-            isEnabled = true;
-        }else{
-            isEnabled = false;  
-        }   
-	webView.loadUrl("javascript:alert('begin set 1'");
-        telephonyManagerClass = Class.forName(telephonyManager.getClass().getName());
-        Method getITelephonyMethod = telephonyManagerClass.getDeclaredMethod("getITelephony");
-        getITelephonyMethod.setAccessible(true);
-        ITelephonyStub = getITelephonyMethod.invoke(telephonyManager);
-        ITelephonyClass = Class.forName(ITelephonyStub.getClass().getName());
-	webView.loadUrl("javascript:alert('begin set 2'");
-        if (isEnabled) {
-           dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("disableDataConnectivity");
-        } else {
-           dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("enableDataConnectivity");   
-        }
-        dataConnSwitchmethod.setAccessible(true);
-        dataConnSwitchmethod.invoke(ITelephonyStub);
-	callbackContext.success();
-	webView.loadUrl("javascript:alert('begin set 3'");
-	return true;
-    }
-    catch (Exception e){
-	webView.loadUrl("javascript:alert('Error java'");    
-    }*/
-    return true;
+        
+int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+		webView.loadUrl("javascript:alert('"+currentapiVersion+"');");
+		boolean ON = true;
+		
+		if(currentapiVersion == Build.VERSION_CODES.FROYO)
+    	{
+		  webView.loadUrl("javascript:alert('Found Froyo');");
+		  try{ 
+			  Method dataConnSwitchmethod;
+			  Class telephonyManagerClass;
+			  Object ITelephonyStub;
+			  Class ITelephonyClass;
+			  TelephonyManager telephonyManager = (TelephonyManager) mContext.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+  
+			  telephonyManagerClass = Class.forName(telephonyManager.getClass().getName());
+		  	  Method getITelephonyMethod = telephonyManagerClass.getDeclaredMethod("getITelephony");
+		  	  getITelephonyMethod.setAccessible(true);
+		  	  ITelephonyStub = getITelephonyMethod.invoke(telephonyManager);
+		  	  ITelephonyClass = Class.forName(ITelephonyStub.getClass().getName());
+  
+		      if(ON) {
+			    dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("enableDataConnectivity");   
+		      }else{
+			    dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("disableDataConnectivity");
+		      }
+		      dataConnSwitchmethod.setAccessible(true);
+		      dataConnSwitchmethod.invoke(ITelephonyStub);
+		  }catch(Exception e){
+			 	webView.loadUrl("javascript:alert('"+e.toString()+"');");			
+		  }
+  
+	  }
+	  else{
+       webView.loadUrl("javascript:alert('Found Gingerbread+');");
+       final ConnectivityManager conman = (ConnectivityManager) mContext.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+       final Class conmanClass = Class.forName(conman.getClass().getName());
+       final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
+       iConnectivityManagerField.setAccessible(true);
+       final Object iConnectivityManager = iConnectivityManagerField.get(conman);
+       final Class iConnectivityManagerClass =  Class.forName(iConnectivityManager.getClass().getName());
+       final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
+       setMobileDataEnabledMethod.setAccessible(true);
+       setMobileDataEnabledMethod.invoke(iConnectivityManager, ON);
+      }	
+      return true;
    }
 }
