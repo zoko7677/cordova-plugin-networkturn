@@ -49,29 +49,6 @@ import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-/*import com.android.internal;
-import com.android.internal.telephony.CallManager;
-import com.android.internal.telephony.CommandException;
-import com.android.internal.telephony.Connection;
-import com.android.internal.telephony.DefaultPhoneNotifier;
-import com.android.internal.telephony.ITelephony;
-import com.android.internal.telephony.IccCard;
-import com.android.internal.telephony.Phone;
-import com.android.internal.telephony.PhoneFactory;
-import com.android.internal.telephony.CallManager;
-import com.android.internal.telephony.CommandException;
-import com.android.internal.telephony.PhoneConstants;
-import com.android.internal.telephony.dataconnection.DctController;
-import com.android.internal.telephony.uicc.AdnRecord;
-import com.android.internal.telephony.uicc.IccIoResult;
-import com.android.internal.telephony.uicc.IccUtils;
-import com.android.internal.telephony.uicc.UiccCard;
-import com.android.internal.telephony.uicc.UiccCarrierPrivilegeRules;
-import com.android.internal.telephony.uicc.UiccController;
-import com.android.internal.util.HexDump;
-
-import static com.android.internal.telephony.PhoneConstants.SUBSCRIPTION_KEY;*/
-
 public class WifiWizard extends CordovaPlugin {
 
     private static final String ADD_NETWORK = "addNetwork";
@@ -662,38 +639,19 @@ public class WifiWizard extends CordovaPlugin {
      * set Mobile Data Enabled with SIM
      *
      * @param enabled true or false
-     */
-    private static boolean isMobileDataEnabledFromLollipop(Context context) {
-      boolean state = false;
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        state = Settings.Global.getInt(context.getContentResolver(), "mobile_data", 0) == 1;	  
-      }        
-      return state;
-    }
-	
+     */	
     private boolean setMobileDataEnabled(CallbackContext callbackContext, JSONArray data){
         
-      enableDataConnectivity();
+      setMobileDataEnabled(true);
+      callbackContext.success();
       return true;
    }
+   public void setMobileDataEnabled(boolean enabled) {
+        try {
+            mService.setMobileDataEnabled(enabled);
+        } catch (RemoteException e) {
+        }
+    }
    
-    public boolean enableDataConnectivity() {
-        enforceModifyPermission();
-        long subId = SubscriptionManager.getDefaultDataSubId();
-        getPhone(subId).setDataEnabled(true);
-        return true;
-    }
-    private Phone getPhone(long subId) {
-        // FIXME: hack for the moment
-        return mPhone;
-        // return PhoneUtils.getPhoneForSubscriber(subId);
-    }
-    public void setDataEnabled(boolean enable) {
-        enforceModifyPermission();
-        mPhone.setDataEnabled(enable);
-    }
-    private void enforceModifyPermission() {
-	PhoneGlobals mApp;
-        mApp.enforceCallingOrSelfPermission(android.Manifest.permission.MODIFY_PHONE_STATE, null);
-    }
+   
 }
