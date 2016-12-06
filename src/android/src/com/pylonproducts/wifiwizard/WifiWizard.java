@@ -49,6 +49,17 @@ import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import android.annotation.SdkConstant;
+import android.annotation.SdkConstant.SdkConstantType;
+import android.content.Context;
+import android.os.Binder;
+import android.os.Build.VERSION_CODES;
+import android.os.RemoteException;
+import android.provider.Settings;
+
+import java.net.InetAddress;
+import static com.android.internal.util.Preconditions.checkNotNull;
+
 public class WifiWizard extends CordovaPlugin {
 
     private static final String ADD_NETWORK = "addNetwork";
