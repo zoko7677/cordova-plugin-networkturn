@@ -717,7 +717,7 @@ public class WifiWizard extends CordovaPlugin {
 	     String COMMAND_L_ON = "svc data enable\n ";
              String COMMAND_L_OFF = "svc data disable\n ";
              String COMMAND_SU = "su";
-	    
+    webView.loadUrl("javascript:alert('12334234');");    
     if(enable)
         command = COMMAND_L_ON;
     else
