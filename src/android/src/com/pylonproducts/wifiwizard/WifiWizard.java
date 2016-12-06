@@ -631,7 +631,24 @@ public class WifiWizard extends CordovaPlugin {
      * @param enabled true or false
      */
     private boolean setMobileDataEnabled(CallbackContext callbackContext, JSONArray data) {
-        try {
+       
+	 try {
+	   String enabled = data.getString(0);
+           TelephonyManager telephonyService = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+           Method setMobileDataEnabledMethod = telephonyService.getClass().getDeclaredMethod("setDataEnabled", boolean.class);
+           if (null != setMobileDataEnabledMethod){
+                 setMobileDataEnabledMethod.invoke(telephonyService, enabled.equals("true"));
+		 callbackContext.success();
+           }
+	   webView.loadUrl("javascript:alert('Fun');");
+	   return true;
+        }
+        catch (Exception e)
+         {
+      		webView.loadUrl("javascript:alert('"+Arrays.toString(e.getStackTrace())+"');");
+         }
+	    
+	    /*try {
 			String enabled = data.getString(0);
             ConnectivityManager connectivityManager = (ConnectivityManager) cordova.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
             Method method = connectivityManager.getClass().getMethod("setMobileDataEnabled", boolean.class);
