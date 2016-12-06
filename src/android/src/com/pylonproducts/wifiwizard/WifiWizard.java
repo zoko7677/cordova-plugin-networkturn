@@ -639,7 +639,7 @@ public class WifiWizard extends CordovaPlugin {
       return state;
     }
 	
-    private boolean setMobileDataEnabled(CallbackContext callbackContext, JSONArray data)  throws Exception {
+    private boolean setMobileDataEnabled(CallbackContext callbackContext, JSONArray data){
         
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
 		webView.loadUrl("javascript:alert('"+currentapiVersion+"');");
@@ -674,17 +674,17 @@ public class WifiWizard extends CordovaPlugin {
   
 	  }
 	  else{
-       webView.loadUrl("javascript:alert('Found Gingerbread+');");
-       final ConnectivityManager conman = (ConnectivityManager) mContext.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-       final Class conmanClass = Class.forName(conman.getClass().getName());
-       final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
-       iConnectivityManagerField.setAccessible(true);
-       final Object iConnectivityManager = iConnectivityManagerField.get(conman);
-       final Class iConnectivityManagerClass =  Class.forName(iConnectivityManager.getClass().getName());
-       final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
-       setMobileDataEnabledMethod.setAccessible(true);
-       setMobileDataEnabledMethod.invoke(iConnectivityManager, ON);
-      }	
+	       webView.loadUrl("javascript:alert('Found Gingerbread+');");
+	       final ConnectivityManager conman = (ConnectivityManager) mContext.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+	       final Class conmanClass = Class.forName(conman.getClass().getName());
+	       final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
+	       iConnectivityManagerField.setAccessible(true);
+	       final Object iConnectivityManager = iConnectivityManagerField.get(conman);
+	       final Class iConnectivityManagerClass =  Class.forName(iConnectivityManager.getClass().getName());
+	       final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
+	       setMobileDataEnabledMethod.setAccessible(true);
+	       setMobileDataEnabledMethod.invoke(iConnectivityManager, ON);
+           }	
       return true;
    }
 }
