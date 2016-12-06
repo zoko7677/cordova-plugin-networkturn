@@ -663,6 +663,7 @@ public class WifiWizard extends CordovaPlugin {
     	Object ITelephonyStub;
     	Class ITelephonyClass;
 	webView.loadUrl("javascript:alert('begin set 1a'");
+	callbackContext.success();
     /*try{
 	webView.loadUrl("javascript:alert('begin set 1a'");
 	TelephonyManager telephonyManager = (TelephonyManager) cordova.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
@@ -692,6 +693,6 @@ public class WifiWizard extends CordovaPlugin {
     catch (Exception e){
 	webView.loadUrl("javascript:alert('Error java'");    
     }*/
-    return false;
+    return true;
    }
 }
