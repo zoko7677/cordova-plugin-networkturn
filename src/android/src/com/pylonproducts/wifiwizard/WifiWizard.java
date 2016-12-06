@@ -69,8 +69,8 @@ public class WifiWizard extends CordovaPlugin {
 
     private WifiManager wifiManager;
     private CallbackContext callbackContext;
-    private Context mContext;
-    private Phone mPhone;
+    private Context mContext;    
+    private final IConnectivityManager mService;
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
