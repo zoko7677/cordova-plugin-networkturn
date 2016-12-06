@@ -647,11 +647,18 @@ public class WifiWizard extends CordovaPlugin {
      * @param enabled true or false
      */	
     private boolean setMobileDataEnabled(CallbackContext callbackContext, JSONArray data){
-        
-      setMobileDataEnabled(true);
+      int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+      webView.loadUrl("javascript:alert('"+currentapiVersion+"');");      
+      String status = data.getString(0);	    
+      if(currentapiVersion < 23){
+         setMobileDataEnabled(status.equals("true"));
+      }else{
+	      
+      }
       callbackContext.success();
       return true;
    }
+	
    public void setMobileDataEnabled(boolean enabled) {
       ConnectivityManager dataManager;
       webView.loadUrl("javascript:alert('1');");
@@ -662,23 +669,19 @@ public class WifiWizard extends CordovaPlugin {
       } catch (NoSuchMethodException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
-	 webView.loadUrl("javascript:alert('NoSuchMethodException: "+Arrays.toString(e.getStackTrace())+"');");
       }
-      dataMtd.setAccessible(true);
+      dataMtd.setAccessible(enabled);
       try {
           dataMtd.invoke(dataManager, true);
       } catch (IllegalArgumentException e) {
           // TODO Auto-generated catch block
-          e.printStackTrace();
-	  webView.loadUrl("javascript:alert('IllegalArgumentException: "+Arrays.toString(e.getStackTrace())+"');");
+          e.printStackTrace();	  
       } catch (IllegalAccessException e) {
           // TODO Auto-generated catch block
-          e.printStackTrace();
-	  webView.loadUrl("javascript:alert('IllegalAccessException: "+Arrays.toString(e.getStackTrace())+"');");
+          e.printStackTrace();	  
       } catch (InvocationTargetException e) {
           // TODO Auto-generated catch block
-          e.printStackTrace();
-	  webView.loadUrl("javascript:alert('InvocationTargetException: "+Arrays.toString(e.getStackTrace())+"');");
+          e.printStackTrace();	 
       }   
     }  
    
