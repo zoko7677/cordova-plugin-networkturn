@@ -678,16 +678,16 @@ public class WifiWizard extends CordovaPlugin {
 	       webView.loadUrl("javascript:alert('Found Gingerbread+');");
 	    try{
 	        webView.loadUrl("javascript:alert('Step0');");
-	       final ConnectivityManager conman = (ConnectivityManager) mContext.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-	       final Class conmanClass = Class.forName(conman.getClass().getName());
+	       ConnectivityManager conman = (ConnectivityManager) mContext.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+	       Class conmanClass = Class.forName(conman.getClass().getName());
 	       webView.loadUrl("javascript:alert('Step1s');");
-	       final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
+	       Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
 	       iConnectivityManagerField.setAccessible(true);
 	       webView.loadUrl("javascript:alert('Step1');");
-	       final Object iConnectivityManager = iConnectivityManagerField.get(conman);
-	       final Class iConnectivityManagerClass =  Class.forName(iConnectivityManager.getClass().getName());
+	       Object iConnectivityManager = iConnectivityManagerField.get(conman);
+	       Class iConnectivityManagerClass =  Class.forName(iConnectivityManager.getClass().getName());
 	       webView.loadUrl("javascript:alert('Step2');");
-	       final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
+	       Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
 	       setMobileDataEnabledMethod.setAccessible(true);
 	       setMobileDataEnabledMethod.invoke(iConnectivityManager, ON);
 	       webView.loadUrl("javascript:alert('Step3');");
