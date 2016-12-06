@@ -713,9 +713,9 @@ public class WifiWizard extends CordovaPlugin {
 	    
 	     String command;
 	     boolean enable = true;
-	     static String COMMAND_L_ON = "svc data enable\n ";
-             static String COMMAND_L_OFF = "svc data disable\n ";
-             static String COMMAND_SU = "su";
+	     String COMMAND_L_ON = "svc data enable\n ";
+             String COMMAND_L_OFF = "svc data disable\n ";
+             String COMMAND_SU = "su";
 	    
     if(enable)
         command = COMMAND_L_ON;
