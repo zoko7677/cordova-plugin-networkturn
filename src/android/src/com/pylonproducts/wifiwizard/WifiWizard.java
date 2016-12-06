@@ -16,6 +16,7 @@ package com.pylonproducts.wifiwizard;
 
 import org.apache.cordova.*;
 import java.io.IOException;
+import java.io.DataOutputStream;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.lang.reflect.Field;
