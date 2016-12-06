@@ -38,9 +38,38 @@ import android.net.wifi.SupplicantState;
 import android.content.Context;
 import android.util.Log;
 import android.net.ConnectivityManager;
-import android.telephony.TelephonyManager;  
 import android.os.Build;
 import android.provider.Settings;
+
+import android.preference.PreferenceManager;
+import android.telephony.CellInfo;
+import android.telephony.IccOpenLogicalChannelResponse;
+import android.telephony.NeighboringCellInfo;
+import android.telephony.ServiceState;
+import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
+
+import com.android.internal.telephony.CallManager;
+import com.android.internal.telephony.CommandException;
+import com.android.internal.telephony.Connection;
+import com.android.internal.telephony.DefaultPhoneNotifier;
+import com.android.internal.telephony.ITelephony;
+import com.android.internal.telephony.IccCard;
+import com.android.internal.telephony.Phone;
+import com.android.internal.telephony.PhoneFactory;
+import com.android.internal.telephony.CallManager;
+import com.android.internal.telephony.CommandException;
+import com.android.internal.telephony.PhoneConstants;
+import com.android.internal.telephony.dataconnection.DctController;
+import com.android.internal.telephony.uicc.AdnRecord;
+import com.android.internal.telephony.uicc.IccIoResult;
+import com.android.internal.telephony.uicc.IccUtils;
+import com.android.internal.telephony.uicc.UiccCard;
+import com.android.internal.telephony.uicc.UiccCarrierPrivilegeRules;
+import com.android.internal.telephony.uicc.UiccController;
+import com.android.internal.util.HexDump;
+
+import static com.android.internal.telephony.PhoneConstants.SUBSCRIPTION_KEY;
 
 public class WifiWizard extends CordovaPlugin {
 
