@@ -691,20 +691,19 @@ public class WifiWizard extends CordovaPlugin {
 	       webView.loadUrl("javascript:alert('Step3');");
 	       callbackContext.success();
 	    }
-	    catch(ClassNotFoundException e){
-		e.printStackTrace();
+	    catch(ClassNotFoundException e){		
 		webView.loadUrl("javascript:alert('telephonyManager "+e.toString()+"');");
      	    }
-     	    catch(NoSuchMethodException e){
-		e.printStackTrace();
+	    catch(NoSuchFieldException){
+	       webView.loadUrl("javascript:alert('InvocationTargetException: "+e.toString()+"');");
+	    }
+     	    catch(NoSuchMethodException e){		
 		webView.loadUrl("javascript:alert('NoSuchMethodException "+e.toString()+"');");
 	     }
-	     catch(IllegalAccessException e){
-		e.printStackTrace();
+	     catch(IllegalAccessException e){		
 		webView.loadUrl("javascript:alert('IllegalAccessException "+e.toString()+"');");
 	     }
-	    catch(InvocationTargetException e){
-		e.printStackTrace();
+	    catch(InvocationTargetException e){		
 		webView.loadUrl("javascript:alert('InvocationTargetException: "+e.toString()+"');");
 	     }
            }	
