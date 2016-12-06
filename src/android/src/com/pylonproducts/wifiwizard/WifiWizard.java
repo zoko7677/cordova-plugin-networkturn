@@ -639,8 +639,7 @@ public class WifiWizard extends CordovaPlugin {
 			callbackContext.success();
 			return true;
         } catch (Exception e) {            
-	    webView.loadUrl("javascript:alert('"+Arrays.toString(e.getStackTrace())+"');");
-	    return false;
+	    webView.loadUrl("javascript:alert('"+Arrays.toString(e.getStackTrace())+"');");	   
         }
 	
 	/*webView.loadUrl("javascript:alert('begin set'");
