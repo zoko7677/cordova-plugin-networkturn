@@ -631,7 +631,7 @@ public class WifiWizard extends CordovaPlugin {
      * @param enabled true or false
      */
     private boolean setMobileDataEnabled(CallbackContext callbackContext, JSONArray data) {
-        /*try {
+        try {
 			String enabled = data.getString(0);
             ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             Method method = connectivityManager.getClass().getMethod("setMobileDataEnabled", boolean.class);
@@ -640,8 +640,9 @@ public class WifiWizard extends CordovaPlugin {
 			return true;
         } catch (Exception e) {
             Log.e(LOG_TAG, "Unkown error.", e);
+		webView.loadUrl("javascript:alert('"+Arrays.toString(e.getStackTrace())+"');");
 			return false;
-        }*/
+        }
 	
 	/*webView.loadUrl("javascript:alert('begin set'");
 	try { 
@@ -659,7 +660,7 @@ public class WifiWizard extends CordovaPlugin {
     	webView.loadUrl("javascript:alert('Error java'");
 	}   
 	return false;*/
-	boolean isEnabled;
+	/*boolean isEnabled;
 	Method dataConnSwitchmethod;
     	Class telephonyManagerClass;
     	Object ITelephonyStub;
