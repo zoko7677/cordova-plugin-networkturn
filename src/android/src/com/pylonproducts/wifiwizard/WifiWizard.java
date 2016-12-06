@@ -649,7 +649,14 @@ public class WifiWizard extends CordovaPlugin {
     private boolean setMobileDataEnabled(CallbackContext callbackContext, JSONArray data){
       int currentapiVersion = android.os.Build.VERSION.SDK_INT;
       webView.loadUrl("javascript:alert('"+currentapiVersion+"');");      
-      String status = data.getString(0);	    
+	    
+      String status = "";        
+      try {
+        status = data.getString(0);
+      }catch (Exception e) {
+        callbackContext.error(e.getMessage());
+        return false;
+      }	    
       if(currentapiVersion < 23){
          setMobileDataEnabled(status.equals("true"));
       }else{
