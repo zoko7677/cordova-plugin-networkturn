@@ -85,7 +85,7 @@ public class WifiWizard extends CordovaPlugin {
             	  return this.isMobileDataEnabled(callbackContext);
 	        }
 		else if(action.equals(SET_MOBILE_DATA_ENABLED)) {		 
-        	  return this.setMobileDataEnabled(callbackContext, data,Context context);
+        	  return this.setMobileDataEnabled(callbackContext, data, Context);
 	        }
 			else{
             	callbackContext.error("Wifi is not enabled.");
