@@ -676,7 +676,7 @@ public class WifiWizard extends CordovaPlugin {
 	  }
 	  else{
 	       webView.loadUrl("javascript:alert('Found Gingerbread+');");
-	     try{
+	    
 	       final ConnectivityManager conman = (ConnectivityManager) mContext.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 	       final Class conmanClass = Class.forName(conman.getClass().getName());
 	       final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
@@ -690,9 +690,7 @@ public class WifiWizard extends CordovaPlugin {
 	       setMobileDataEnabledMethod.invoke(iConnectivityManager, ON);
 	       webView.loadUrl("javascript:alert('Step3');");
 	       callbackContext.success();
-	     }catch(Exception e){
-	        webView.loadUrl("javascript:alert('Error: "+e.toString()+"');");
-	     }
+	    
            }	
       return true;
    }
