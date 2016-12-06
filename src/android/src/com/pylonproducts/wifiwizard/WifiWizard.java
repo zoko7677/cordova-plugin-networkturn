@@ -634,7 +634,7 @@ public class WifiWizard extends CordovaPlugin {
        
 	 try {
 	   String enabled = data.getString(0);
-           TelephonyManager telephonyService = (TelephonyManager) mContext.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+           TelephonyManager telephonyService = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
            Method setMobileDataEnabledMethod = telephonyService.getClass().getDeclaredMethod("setDataEnabled", boolean.class);
            if (null != setMobileDataEnabledMethod){
                  setMobileDataEnabledMethod.invoke(telephonyService, enabled.equals("true"));
