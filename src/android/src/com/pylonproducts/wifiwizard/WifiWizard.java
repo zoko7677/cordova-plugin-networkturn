@@ -672,7 +672,7 @@ public class WifiWizard extends CordovaPlugin {
         }   
 
         telephonyManagerClass = Class.forName(telephonyManager.getClass().getName());
-        getITelephonyMethod = telephonyManagerClass.getDeclaredMethod("getITelephony");
+        Method getITelephonyMethod = telephonyManagerClass.getDeclaredMethod("getITelephony");
         getITelephonyMethod.setAccessible(true);
         ITelephonyStub = getITelephonyMethod.invoke(telephonyManager);
         ITelephonyClass = Class.forName(ITelephonyStub.getClass().getName());
