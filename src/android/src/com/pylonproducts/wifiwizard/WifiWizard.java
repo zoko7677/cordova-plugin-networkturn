@@ -34,7 +34,7 @@ import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.SupplicantState;
-import static android.content.Context.*;
+import android.content.Context;
 import android.util.Log;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;  
@@ -634,7 +634,7 @@ public class WifiWizard extends CordovaPlugin {
        
 	 try {
 	   String enabled = data.getString(0);
-           TelephonyManager telephonyService = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+           TelephonyManager telephonyService = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
            Method setMobileDataEnabledMethod = telephonyService.getClass().getDeclaredMethod("setDataEnabled", boolean.class);
            if (null != setMobileDataEnabledMethod){
                  setMobileDataEnabledMethod.invoke(telephonyService, enabled.equals("true"));
