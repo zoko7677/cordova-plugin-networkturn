@@ -35,6 +35,7 @@ import android.net.wifi.SupplicantState;
 import android.content.Context;
 import android.util.Log;
 import android.net.ConnectivityManager;
+import android.telephony.TelephonyManager;  
 
 
 public class WifiWizard extends CordovaPlugin {
@@ -640,14 +641,15 @@ public class WifiWizard extends CordovaPlugin {
             Log.e(LOG_TAG, "Unkown error.", e);
 			return false;
         }*/
-	webView.loadUrl("javascript:alert('begin set'");
+	
+	/*webView.loadUrl("javascript:alert('begin set'");
 	try { 
 	    webView.loadUrl("javascript:alert('begin set 1'");
 	    String enabled = data.getString(0);
 	    webView.loadUrl("javascript:alert('"+(enabled.equals("true") ? "true" : "false")+"'");
             ConnectivityManager connectivityManager = (ConnectivityManager) cordova.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
             Method method = connectivityManager.getClass().getMethod("setMobileDataEnabled", boolean.class);
-             /*method.invoke(connectivityManager, enabled.equals("true"));*/
+            method.invoke(connectivityManager, enabled.equals("true"));
 	    callbackContext.success();
 	    return true;
 	}
@@ -655,6 +657,28 @@ public class WifiWizard extends CordovaPlugin {
 	{
     	webView.loadUrl("javascript:alert('Error java'");
 	}   
-	return false;
+	return false;*/
+	    
+	TelephonyManager telephonyManager = (TelephonyManager) cordova.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+        if(telephonyManager.getDataState() == TelephonyManager.DATA_CONNECTED){
+            isEnabled = true;
+        }else{
+            isEnabled = false;  
+        }   
+
+        telephonyManagerClass = Class.forName(telephonyManager.getClass().getName());
+        Method getITelephonyMethod = telephonyManagerClass.getDeclaredMethod("getITelephony");
+        getITelephonyMethod.setAccessible(true);
+        ITelephonyStub = getITelephonyMethod.invoke(telephonyManager);
+        ITelephonyClass = Class.forName(ITelephonyStub.getClass().getName());
+
+        if (isEnabled) {
+           dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("disableDataConnectivity");
+        } else {
+           dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("enableDataConnectivity");   
+        }
+        dataConnSwitchmethod.setAccessible(true);
+        dataConnSwitchmethod.invoke(ITelephonyStub);
+	return true;
     }
 }
