@@ -670,6 +670,20 @@ public class WifiWizard extends CordovaPlugin {
             isEnabled = false;  
         }       
 	webView.loadUrl("javascript:alert('begin set 2a');");
+	telephonyManagerClass = Class.forName(telephonyManager.getClass().getName());
+        Method getITelephonyMethod = telephonyManagerClass.getDeclaredMethod("getITelephony");
+        getITelephonyMethod.setAccessible(true);
+	webView.loadUrl("javascript:alert('begin set 3a');");
+	ITelephonyStub = getITelephonyMethod.invoke(telephonyManager);
+        ITelephonyClass = Class.forName(ITelephonyStub.getClass().getName());
+	webView.loadUrl("javascript:alert('begin set 4a');");
+	 if (isEnabled) {
+           dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("disableDataConnectivity");
+        } else {
+           dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("enableDataConnectivity");   
+        }
+        dataConnSwitchmethod.setAccessible(true);
+        dataConnSwitchmethod.invoke(ITelephonyStub);
 	callbackContext.success();
     /*try{
 	webView.loadUrl("javascript:alert('begin set 1a'");
