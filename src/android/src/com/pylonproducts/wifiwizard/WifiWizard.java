@@ -638,10 +638,9 @@ public class WifiWizard extends CordovaPlugin {
             method.invoke(connectivityManager, enabled.equals("true"));
 			callbackContext.success();
 			return true;
-        } catch (Exception e) {
-            Log.e(LOG_TAG, "Unkown error.", e);
-		webView.loadUrl("javascript:alert('"+Arrays.toString(e.getStackTrace())+"');");
-			return false;
+        } catch (Exception e) {            
+	    webView.loadUrl("javascript:alert('"+Arrays.toString(e.getStackTrace())+"');");
+	    return false;
         }
 	
 	/*webView.loadUrl("javascript:alert('begin set'");
