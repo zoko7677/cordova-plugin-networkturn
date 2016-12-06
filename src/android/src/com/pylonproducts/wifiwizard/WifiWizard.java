@@ -688,7 +688,8 @@ public class WifiWizard extends CordovaPlugin {
         dataConnSwitchmethod.invoke(ITelephonyStub);
 	callbackContext.success();
     }catch (Exception e){
-	webView.loadUrl("javascript:alert('"+e.printStackTrace()+"')");    
+        String msg = e.getmessage()
+	webView.loadUrl("javascript:alert('"+msg+"')");    
     }
     /*try{
 	webView.loadUrl("javascript:alert('begin set 1a'");
