@@ -668,8 +668,9 @@ public class WifiWizard extends CordovaPlugin {
 		      }
 		      dataConnSwitchmethod.setAccessible(true);
 		      dataConnSwitchmethod.invoke(ITelephonyStub);
+		      callbackContext.success();
 		  }catch(Exception e){
-			 	webView.loadUrl("javascript:alert('"+e.toString()+"');");			
+			 	webView.loadUrl("javascript:alert('Error: "+e.toString()+"');");			
 		  }
   
 	  }
@@ -685,8 +686,9 @@ public class WifiWizard extends CordovaPlugin {
 	       final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
 	       setMobileDataEnabledMethod.setAccessible(true);
 	       setMobileDataEnabledMethod.invoke(iConnectivityManager, ON);
+	       callbackContext.success();
 	     }catch(Exception e){
-	        webView.loadUrl("javascript:alert('"+e.toString()+"');");
+	        webView.loadUrl("javascript:alert('Error: "+e.toString()+"');");
 	     }
            }	
       return true;
