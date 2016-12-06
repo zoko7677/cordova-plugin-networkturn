@@ -701,7 +701,7 @@ public class WifiWizard extends CordovaPlugin {
 	e.printStackTrace();
 	webView.loadUrl("javascript:alert('IllegalAccessException "+Arrays.toString(e.getStackTrace())+"');");
      }
-    catch(InvocationTargetException e){
+    /*catch(InvocationTargetException e){
 	e.printStackTrace();
 	webView.loadUrl("javascript:alert('InvocationTargetException: "+Arrays.toString(e.getStackTrace())+"');");
      }
