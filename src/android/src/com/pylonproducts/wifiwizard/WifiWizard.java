@@ -58,11 +58,12 @@ public class WifiWizard extends CordovaPlugin {
     private static final String IS_MOBILE_DATA_ENABLED = "isMobileDataEnabled";
     private static final String SET_MOBILE_DATA_ENABLED = "setMobileDataEnabled";	
     private static final String TAG = "WifiWizard";
-	private static final String LOG_TAG = "WifiStatus";
+    private static final String LOG_TAG = "WifiStatus";
 
     private WifiManager wifiManager;
     private CallbackContext callbackContext;
-	private Context mContext;
+    private Context mContext;
+    private Phone mPhone;
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -627,7 +628,7 @@ public class WifiWizard extends CordovaPlugin {
         return mobileDataEnabled;	    
     } 
 	
-	/**
+    /**
      * set Mobile Data Enabled with SIM
      *
      * @param enabled true or false
@@ -642,107 +643,27 @@ public class WifiWizard extends CordovaPlugin {
 	
     private boolean setMobileDataEnabled(CallbackContext callbackContext, JSONArray data){
         
-        /*int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-		webView.loadUrl("javascript:alert('"+currentapiVersion+"');");
-		boolean ON = true;
-		
-		if(currentapiVersion == Build.VERSION_CODES.FROYO)
-    	{
-		  webView.loadUrl("javascript:alert('Found Froyo');");
-		  try{ 
-			  Method dataConnSwitchmethod;
-			  Class telephonyManagerClass;
-			  Object ITelephonyStub;
-			  Class ITelephonyClass;
-			  TelephonyManager telephonyManager = (TelephonyManager) mContext.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-  
-			  telephonyManagerClass = Class.forName(telephonyManager.getClass().getName());
-		  	  Method getITelephonyMethod = telephonyManagerClass.getDeclaredMethod("getITelephony");
-		  	  getITelephonyMethod.setAccessible(true);
-		  	  ITelephonyStub = getITelephonyMethod.invoke(telephonyManager);
-		  	  ITelephonyClass = Class.forName(ITelephonyStub.getClass().getName());
-  
-		      if(ON) {
-			    dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("enableDataConnectivity");   
-		      }else{
-			    dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("disableDataConnectivity");
-		      }
-		      dataConnSwitchmethod.setAccessible(true);
-		      dataConnSwitchmethod.invoke(ITelephonyStub);
-		      callbackContext.success();
-		  }catch(Exception e){
-			 	webView.loadUrl("javascript:alert('Error: "+e.toString()+"');");			
-		  }
-  
-	  }
-	  else{
-	       webView.loadUrl("javascript:alert('Found Gingerbread+');");
-	    try{
-	       webView.loadUrl("javascript:alert('Step0');");
-	       ConnectivityManager conman = (ConnectivityManager) mContext.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-	       webView.loadUrl("javascript:alert('Step0s');");
-	       Class conmanClass = Class.forName(conman.getClass().getName());
-	       webView.loadUrl("javascript:alert('Step1s');");
-	       Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
-	       iConnectivityManagerField.setAccessible(true);
-	       webView.loadUrl("javascript:alert('Step1');");
-	       Object iConnectivityManager = iConnectivityManagerField.get(conman);
-	       Class iConnectivityManagerClass =  Class.forName(iConnectivityManager.getClass().getName());
-	       webView.loadUrl("javascript:alert('Step2');");
-	       Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
-	       setMobileDataEnabledMethod.setAccessible(true);
-	       setMobileDataEnabledMethod.invoke(iConnectivityManager, ON);
-	       webView.loadUrl("javascript:alert('Step3');");
-	       callbackContext.success();
-	    }
-	    catch(ClassNotFoundException e){		
-		webView.loadUrl("javascript:alert('telephonyManager "+Arrays.toString(e.getStackTrace())+"');");
-     	    }
-	    catch(NoSuchFieldException e){
-	       webView.loadUrl("javascript:alert('InvocationTargetException: "+Arrays.toString(e.getStackTrace())+"');");
-	    }
-     	    catch(NoSuchMethodException e){		
-		webView.loadUrl("javascript:alert('NoSuchMethodException "+Arrays.toString(e.getStackTrace())+"');");
-	     }
-	     catch(IllegalAccessException e){		
-		webView.loadUrl("javascript:alert('IllegalAccessException "+Arrays.toString(e.getStackTrace())+"');");
-	     }
-	    catch(InvocationTargetException e){		
-		webView.loadUrl("javascript:alert('InvocationTargetException: "+Arrays.toString(e.getStackTrace())+"');");
-	     }
-           }*/
-	    
-	     String command;
-	     boolean enable = true;
-	     String COMMAND_L_ON = "settings put global mobile_data 1"; //"svc data enable\n ";
-             String COMMAND_L_OFF = "svc data disable\n ";
-             String COMMAND_SU = "su";
-    webView.loadUrl("javascript:alert('12334234');");    
-    if(enable)
-        command = COMMAND_L_ON;
-    else
-        command = COMMAND_L_OFF;        
-
-    try{
-        Process su = Runtime.getRuntime().exec(COMMAND_SU);
-        DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
-
-        outputStream.writeBytes(command);
-        outputStream.flush();
-
-        outputStream.writeBytes("exit\n");
-        outputStream.flush();
-        try {
-            su.waitFor();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        outputStream.close();
-	callbackContext.success();
-    }catch(IOException e){
-        webView.loadUrl("javascript:alert('InvocationTargetException: "+Arrays.toString(e.getStackTrace())+"');");
-    }
+      enableDataConnectivity();
       return true;
    }
+   
+    public boolean enableDataConnectivity() {
+        enforceModifyPermission();
+        long subId = SubscriptionManager.getDefaultDataSubId();
+        getPhone(subId).setDataEnabled(true);
+        return true;
+    }
+    private Phone getPhone(long subId) {
+        // FIXME: hack for the moment
+        return mPhone;
+        // return PhoneUtils.getPhoneForSubscriber(subId);
+    }
+    public void setDataEnabled(boolean enable) {
+        enforceModifyPermission();
+        mPhone.setDataEnabled(enable);
+    }
+    private void enforceModifyPermission() {
+	PhoneGlobals mApp;
+        mApp.enforceCallingOrSelfPermission(android.Manifest.permission.MODIFY_PHONE_STATE, null);
+    }
 }
