@@ -20,6 +20,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.lang.reflect.InvocationTargetException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -701,7 +702,7 @@ public class WifiWizard extends CordovaPlugin {
 	e.printStackTrace();
 	webView.loadUrl("javascript:alert('IllegalAccessException "+Arrays.toString(e.getStackTrace())+"');");
      }
-    /*catch(InvocationTargetException e){
+    catch(InvocationTargetException e){
 	e.printStackTrace();
 	webView.loadUrl("javascript:alert('InvocationTargetException: "+Arrays.toString(e.getStackTrace())+"');");
      }
