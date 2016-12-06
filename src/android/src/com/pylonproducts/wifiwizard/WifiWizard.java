@@ -694,7 +694,7 @@ public class WifiWizard extends CordovaPlugin {
 	    catch(ClassNotFoundException e){		
 		webView.loadUrl("javascript:alert('telephonyManager "+e.toString()+"');");
      	    }
-	    catch(NoSuchFieldException){
+	    catch(NoSuchFieldException e){
 	       webView.loadUrl("javascript:alert('InvocationTargetException: "+e.toString()+"');");
 	    }
      	    catch(NoSuchMethodException e){		
