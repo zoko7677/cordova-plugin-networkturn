@@ -659,6 +659,11 @@ public class WifiWizard extends CordovaPlugin {
 	}   
 	return false;*/
 	boolean isEnabled;
+	Method dataConnSwitchmethod;
+    	Class telephonyManagerClass;
+    	Object ITelephonyStub;
+    	Class ITelephonyClass;
+	    
 	TelephonyManager telephonyManager = (TelephonyManager) cordova.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
         if(telephonyManager.getDataState() == TelephonyManager.DATA_CONNECTED){
             isEnabled = true;
@@ -666,16 +671,16 @@ public class WifiWizard extends CordovaPlugin {
             isEnabled = false;  
         }   
 
-        Class telephonyManagerClass = Class.forName(telephonyManager.getClass().getName());
-        Method getITelephonyMethod = telephonyManagerClass.getDeclaredMethod("getITelephony");
+        telephonyManagerClass = Class.forName(telephonyManager.getClass().getName());
+        getITelephonyMethod = telephonyManagerClass.getDeclaredMethod("getITelephony");
         getITelephonyMethod.setAccessible(true);
-        Method ITelephonyStub = getITelephonyMethod.invoke(telephonyManager);
-        Class ITelephonyClass = Class.forName(ITelephonyStub.getClass().getName());
+        ITelephonyStub = getITelephonyMethod.invoke(telephonyManager);
+        ITelephonyClass = Class.forName(ITelephonyStub.getClass().getName());
 
         if (isEnabled) {
-           Method dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("disableDataConnectivity");
+           dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("disableDataConnectivity");
         } else {
-           Method dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("enableDataConnectivity");   
+           dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("enableDataConnectivity");   
         }
         dataConnSwitchmethod.setAccessible(true);
         dataConnSwitchmethod.invoke(ITelephonyStub);
