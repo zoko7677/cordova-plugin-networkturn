@@ -39,6 +39,7 @@ import android.util.Log;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;  
 import android.os.Build;
+import com.android.settings;
 
 public class WifiWizard extends CordovaPlugin {
 
