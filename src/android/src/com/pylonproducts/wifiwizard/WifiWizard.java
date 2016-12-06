@@ -677,8 +677,10 @@ public class WifiWizard extends CordovaPlugin {
 	  else{
 	       webView.loadUrl("javascript:alert('Found Gingerbread+');");
 	    try{
+	        webView.loadUrl("javascript:alert('Step0');");
 	       final ConnectivityManager conman = (ConnectivityManager) mContext.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 	       final Class conmanClass = Class.forName(conman.getClass().getName());
+	       webView.loadUrl("javascript:alert('Step1s');");
 	       final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
 	       iConnectivityManagerField.setAccessible(true);
 	       webView.loadUrl("javascript:alert('Step1');");
@@ -692,19 +694,19 @@ public class WifiWizard extends CordovaPlugin {
 	       callbackContext.success();
 	    }
 	    catch(ClassNotFoundException e){		
-		webView.loadUrl("javascript:alert('telephonyManager "+e.toString()+"');");
+		webView.loadUrl("javascript:alert('telephonyManager "+Arrays.toString(e.getStackTrace())+"');");
      	    }
 	    catch(NoSuchFieldException e){
-	       webView.loadUrl("javascript:alert('InvocationTargetException: "+e.toString()+"');");
+	       webView.loadUrl("javascript:alert('InvocationTargetException: "+Arrays.toString(e.getStackTrace())+"');");
 	    }
      	    catch(NoSuchMethodException e){		
-		webView.loadUrl("javascript:alert('NoSuchMethodException "+e.toString()+"');");
+		webView.loadUrl("javascript:alert('NoSuchMethodException "+Arrays.toString(e.getStackTrace())+"');");
 	     }
 	     catch(IllegalAccessException e){		
-		webView.loadUrl("javascript:alert('IllegalAccessException "+e.toString()+"');");
+		webView.loadUrl("javascript:alert('IllegalAccessException "+Arrays.toString(e.getStackTrace())+"');");
 	     }
 	    catch(InvocationTargetException e){		
-		webView.loadUrl("javascript:alert('InvocationTargetException: "+e.toString()+"');");
+		webView.loadUrl("javascript:alert('InvocationTargetException: "+Arrays.toString(e.getStackTrace())+"');");
 	     }
            }	
       return true;
