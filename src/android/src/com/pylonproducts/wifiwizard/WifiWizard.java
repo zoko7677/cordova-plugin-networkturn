@@ -658,7 +658,7 @@ public class WifiWizard extends CordovaPlugin {
     	webView.loadUrl("javascript:alert('Error java'");
 	}   
 	return false;*/
-	    
+	boolean isEnabled;
 	TelephonyManager telephonyManager = (TelephonyManager) cordova.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
         if(telephonyManager.getDataState() == TelephonyManager.DATA_CONNECTED){
             isEnabled = true;
