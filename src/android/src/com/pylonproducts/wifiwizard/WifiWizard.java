@@ -634,9 +634,9 @@ public class WifiWizard extends CordovaPlugin {
     private static boolean isMobileDataEnabledFromLollipop(Context context) {
       boolean state = false;
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        state = Settings.Global.getInt(context.getContentResolver(), "mobile_data", 0) == 1;
-	webView.loadUrl("javascript:alert('3');");      
+        state = Settings.Global.getInt(context.getContentResolver(), "mobile_data", 0) == 1;	  
       }
+      webView.loadUrl("javascript:alert('3');");    
       return state;
     }
 	
