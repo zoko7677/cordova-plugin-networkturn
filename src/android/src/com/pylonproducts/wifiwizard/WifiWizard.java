@@ -664,7 +664,7 @@ public class WifiWizard extends CordovaPlugin {
     	Class ITelephonyClass;
 	    
 	webView.loadUrl("javascript:alert('begin set 1a');");
-	
+     try{
 	TelephonyManager telephonyManager = (TelephonyManager) cordova.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
         if(telephonyManager.getDataState() == TelephonyManager.DATA_CONNECTED){
             isEnabled = true;
@@ -687,7 +687,19 @@ public class WifiWizard extends CordovaPlugin {
         dataConnSwitchmethod.setAccessible(true);
         dataConnSwitchmethod.invoke(ITelephonyStub);
 	callbackContext.success();
-   
+     }
+     catch(ClassNotFoundException e){
+	e.printStackTrace();
+	webView.loadUrl("javascript:alert('telephonyManager');");
+     }
+     catch(NoSuchMethodException e){
+	e.printStackTrace();
+	webView.loadUrl("javascript:alert('NoSuchMethodException');");
+     }
+     catch(IllegalAccessException e){
+	e.printStackTrace();
+	webView.loadUrl("javascript:alert('IllegalAccessException');");
+     }	
     /*try{
 	webView.loadUrl("javascript:alert('begin set 1a'");
 	TelephonyManager telephonyManager = (TelephonyManager) cordova.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
