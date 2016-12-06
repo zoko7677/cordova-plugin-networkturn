@@ -671,13 +671,13 @@ public class WifiWizard extends CordovaPlugin {
         }else{
             isEnabled = false;  
         }   
-
+	webView.loadUrl("javascript:alert('begin set 1'");
         telephonyManagerClass = Class.forName(telephonyManager.getClass().getName());
         Method getITelephonyMethod = telephonyManagerClass.getDeclaredMethod("getITelephony");
         getITelephonyMethod.setAccessible(true);
         ITelephonyStub = getITelephonyMethod.invoke(telephonyManager);
         ITelephonyClass = Class.forName(ITelephonyStub.getClass().getName());
-
+	webView.loadUrl("javascript:alert('begin set 2'");
         if (isEnabled) {
            dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("disableDataConnectivity");
         } else {
@@ -685,6 +685,8 @@ public class WifiWizard extends CordovaPlugin {
         }
         dataConnSwitchmethod.setAccessible(true);
         dataConnSwitchmethod.invoke(ITelephonyStub);
+	callbackContext.success();
+	webView.loadUrl("javascript:alert('begin set 3'");
 	return true;
     }
     catch (Exception e){
