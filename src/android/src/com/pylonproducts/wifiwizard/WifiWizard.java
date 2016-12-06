@@ -34,7 +34,7 @@ import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.SupplicantState;
-import android.content.Context.*;
+import static android.content.Context.*;
 import android.util.Log;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;  
