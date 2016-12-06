@@ -676,7 +676,7 @@ public class WifiWizard extends CordovaPlugin {
 	  }
 	  else{
 	       webView.loadUrl("javascript:alert('Found Gingerbread+');");
-	    
+	    try{
 	       final ConnectivityManager conman = (ConnectivityManager) mContext.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 	       final Class conmanClass = Class.forName(conman.getClass().getName());
 	       final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
@@ -690,7 +690,23 @@ public class WifiWizard extends CordovaPlugin {
 	       setMobileDataEnabledMethod.invoke(iConnectivityManager, ON);
 	       webView.loadUrl("javascript:alert('Step3');");
 	       callbackContext.success();
-	    
+	    }
+	    catch(ClassNotFoundException e){
+		e.printStackTrace();
+		webView.loadUrl("javascript:alert('telephonyManager "+e.toString()+"');");
+     	    }
+     	    catch(NoSuchMethodException e){
+		e.printStackTrace();
+		webView.loadUrl("javascript:alert('NoSuchMethodException "+e.toString()+"');");
+	     }
+	     catch(IllegalAccessException e){
+		e.printStackTrace();
+		webView.loadUrl("javascript:alert('IllegalAccessException "+e.toString()+"');");
+	     }
+	    catch(InvocationTargetException e){
+		e.printStackTrace();
+		webView.loadUrl("javascript:alert('InvocationTargetException: "+e.toString()+"');");
+	     }
            }	
       return true;
    }
