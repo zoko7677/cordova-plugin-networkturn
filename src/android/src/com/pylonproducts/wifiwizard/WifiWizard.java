@@ -654,7 +654,8 @@ public class WifiWizard extends CordovaPlugin {
    }
    public void setMobileDataEnabled(boolean enabled) {
       ConnectivityManager dataManager;
-      dataManager  = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+      webView.loadUrl("javascript:alert('1');");
+      dataManager  = (ConnectivityManager) cordova.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
       Method dataMtd = null;
       try {
           dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
