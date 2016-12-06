@@ -76,8 +76,7 @@ public class WifiWizard extends CordovaPlugin {
 
     private WifiManager wifiManager;
     private CallbackContext callbackContext;
-    private Context mContext;    
-    private final ConnectivityManager mService;
+    private Context mContext;      
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -654,11 +653,32 @@ public class WifiWizard extends CordovaPlugin {
       return true;
    }
    public void setMobileDataEnabled(boolean enabled) {
-        try {
-            mService.setMobileDataEnabled(enabled);
-        } catch (RemoteException e) {
-        }
-    }
-   
+      ConnectivityManager dataManager;
+      dataManager  = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+      Method dataMtd = null;
+      try {
+          dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
+      } catch (NoSuchMethodException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+	 webView.loadUrl("javascript:alert('NoSuchMethodException: "+Arrays.toString(e.getStackTrace())+"');");
+      }
+      dataMtd.setAccessible(true);
+      try {
+          dataMtd.invoke(dataManager, true);
+      } catch (IllegalArgumentException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+	  webView.loadUrl("javascript:alert('IllegalArgumentException: "+Arrays.toString(e.getStackTrace())+"');");
+      } catch (IllegalAccessException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+	  webView.loadUrl("javascript:alert('IllegalAccessException: "+Arrays.toString(e.getStackTrace())+"');");
+      } catch (InvocationTargetException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+	  webView.loadUrl("javascript:alert('InvocationTargetException: "+Arrays.toString(e.getStackTrace())+"');");
+      }   
+    }  
    
 }
