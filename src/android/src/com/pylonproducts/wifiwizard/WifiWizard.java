@@ -666,16 +666,16 @@ public class WifiWizard extends CordovaPlugin {
             isEnabled = false;  
         }   
 
-        telephonyManagerClass = Class.forName(telephonyManager.getClass().getName());
+        Class telephonyManagerClass = Class.forName(telephonyManager.getClass().getName());
         Method getITelephonyMethod = telephonyManagerClass.getDeclaredMethod("getITelephony");
         getITelephonyMethod.setAccessible(true);
-        ITelephonyStub = getITelephonyMethod.invoke(telephonyManager);
-        ITelephonyClass = Class.forName(ITelephonyStub.getClass().getName());
+        Method ITelephonyStub = getITelephonyMethod.invoke(telephonyManager);
+        Class ITelephonyClass = Class.forName(ITelephonyStub.getClass().getName());
 
         if (isEnabled) {
-           dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("disableDataConnectivity");
+           Method dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("disableDataConnectivity");
         } else {
-           dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("enableDataConnectivity");   
+           Method dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("enableDataConnectivity");   
         }
         dataConnSwitchmethod.setAccessible(true);
         dataConnSwitchmethod.invoke(ITelephonyStub);
