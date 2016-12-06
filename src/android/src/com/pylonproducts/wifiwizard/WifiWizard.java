@@ -690,16 +690,20 @@ public class WifiWizard extends CordovaPlugin {
      }
      catch(ClassNotFoundException e){
 	e.printStackTrace();
-	webView.loadUrl("javascript:alert('telephonyManager');");
+	webView.loadUrl("javascript:alert('telephonyManager "+Arrays.toString(except.getStackTrace())+"');");
      }
      catch(NoSuchMethodException e){
 	e.printStackTrace();
-	webView.loadUrl("javascript:alert('NoSuchMethodException');");
+	webView.loadUrl("javascript:alert('NoSuchMethodException "+Arrays.toString(except.getStackTrace())+"');");
      }
      catch(IllegalAccessException e){
 	e.printStackTrace();
-	webView.loadUrl("javascript:alert('IllegalAccessException');");
-     }	
+	webView.loadUrl("javascript:alert('IllegalAccessException "+Arrays.toString(except.getStackTrace())+"');");
+     }
+    catch(InvocationTargetException e){
+	e.printStackTrace();
+	webView.loadUrl("javascript:alert('InvocationTargetException: "+Arrays.toString(except.getStackTrace())+"');");
+     }
     /*try{
 	webView.loadUrl("javascript:alert('begin set 1a'");
 	TelephonyManager telephonyManager = (TelephonyManager) cordova.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
