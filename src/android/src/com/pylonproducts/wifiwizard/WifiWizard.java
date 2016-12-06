@@ -681,11 +681,14 @@ public class WifiWizard extends CordovaPlugin {
 	       final Class conmanClass = Class.forName(conman.getClass().getName());
 	       final Field iConnectivityManagerField = conmanClass.getDeclaredField("mService");
 	       iConnectivityManagerField.setAccessible(true);
+	       webView.loadUrl("javascript:alert('Step1');");
 	       final Object iConnectivityManager = iConnectivityManagerField.get(conman);
 	       final Class iConnectivityManagerClass =  Class.forName(iConnectivityManager.getClass().getName());
+	       webView.loadUrl("javascript:alert('Step2');");
 	       final Method setMobileDataEnabledMethod = iConnectivityManagerClass.getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
 	       setMobileDataEnabledMethod.setAccessible(true);
 	       setMobileDataEnabledMethod.invoke(iConnectivityManager, ON);
+	       webView.loadUrl("javascript:alert('Step3');");
 	       callbackContext.success();
 	     }catch(Exception e){
 	        webView.loadUrl("javascript:alert('Error: "+e.toString()+"');");
