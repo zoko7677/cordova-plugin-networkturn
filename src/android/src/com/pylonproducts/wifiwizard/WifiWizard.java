@@ -641,7 +641,7 @@ public class WifiWizard extends CordovaPlugin {
 	
     private boolean setMobileDataEnabled(CallbackContext callbackContext, JSONArray data){
         
-        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        /*int currentapiVersion = android.os.Build.VERSION.SDK_INT;
 		webView.loadUrl("javascript:alert('"+currentapiVersion+"');");
 		boolean ON = true;
 		
@@ -678,7 +678,7 @@ public class WifiWizard extends CordovaPlugin {
 	       webView.loadUrl("javascript:alert('Found Gingerbread+');");
 	    try{
 	       webView.loadUrl("javascript:alert('Step0');");
-	       ConnectivityManager conman = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+	       ConnectivityManager conman = (ConnectivityManager) mContext.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 	       webView.loadUrl("javascript:alert('Step0s');");
 	       Class conmanClass = Class.forName(conman.getClass().getName());
 	       webView.loadUrl("javascript:alert('Step1s');");
@@ -709,7 +709,39 @@ public class WifiWizard extends CordovaPlugin {
 	    catch(InvocationTargetException e){		
 		webView.loadUrl("javascript:alert('InvocationTargetException: "+Arrays.toString(e.getStackTrace())+"');");
 	     }
-           }	
+           }*/
+	    
+	     String command;
+	     boolean enable = true;
+	     static String COMMAND_L_ON = "svc data enable\n ";
+             static String COMMAND_L_OFF = "svc data disable\n ";
+             static String COMMAND_SU = "su";
+	    
+    if(enable)
+        command = COMMAND_L_ON;
+    else
+        command = COMMAND_L_OFF;        
+
+    try{
+        Process su = Runtime.getRuntime().exec(COMMAND_SU);
+        DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
+
+        outputStream.writeBytes(command);
+        outputStream.flush();
+
+        outputStream.writeBytes("exit\n");
+        outputStream.flush();
+        try {
+            su.waitFor();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        outputStream.close();
+	callbackContext.success();
+    }catch(IOException e){
+        webView.loadUrl("javascript:alert('InvocationTargetException: "+Arrays.toString(e.getStackTrace())+"');");
+    }
       return true;
    }
 }
