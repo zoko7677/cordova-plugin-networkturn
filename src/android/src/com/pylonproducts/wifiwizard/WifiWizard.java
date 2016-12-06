@@ -662,7 +662,14 @@ public class WifiWizard extends CordovaPlugin {
     	Class telephonyManagerClass;
     	Object ITelephonyStub;
     	Class ITelephonyClass;
-	webView.loadUrl("javascript:alert('begin set 1a'");
+	webView.loadUrl("javascript:alert('begin set 1a');");
+	TelephonyManager telephonyManager = (TelephonyManager) cordova.getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+        if(telephonyManager.getDataState() == TelephonyManager.DATA_CONNECTED){
+            isEnabled = true;
+        }else{
+            isEnabled = false;  
+        }       
+	webView.loadUrl("javascript:alert('begin set 2a');");
 	callbackContext.success();
     /*try{
 	webView.loadUrl("javascript:alert('begin set 1a'");
