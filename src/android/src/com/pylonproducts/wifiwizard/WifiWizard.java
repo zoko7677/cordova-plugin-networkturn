@@ -662,15 +662,17 @@ public class WifiWizard extends CordovaPlugin {
 	 else
 	  setMobileDataEnabled(false);
       }else{
-	      
+	 if(status == "true")
+           setMobileDataEnabledAndL(true);
+	 else
+	   setMobileDataEnabledAndL(false);	  
       }
       callbackContext.success();
       return true;
    }
 	
    public void setMobileDataEnabled(boolean enabled) {
-      ConnectivityManager dataManager;
-      webView.loadUrl("javascript:alert('1');");
+      ConnectivityManager dataManager;      
       dataManager  = (ConnectivityManager) cordova.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
       Method dataMtd = null;
       try {
@@ -693,5 +695,31 @@ public class WifiWizard extends CordovaPlugin {
           e.printStackTrace();	 
       }   
     }  
+	    
+     public void setMobileDataEnabledAndL(boolean enabled) {
+	try{ 
+	   Method dataConnSwitchmethod;
+	   Class telephonyManagerClass;
+	   Object ITelephonyStub;
+	   Class ITelephonyClass;
+	   TelephonyManager telephonyManager = (TelephonyManager) mContext.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+  	   telephonyManagerClass = Class.forName(telephonyManager.getClass().getName());
+	   Method getITelephonyMethod = telephonyManagerClass.getDeclaredMethod("getITelephony");
+	   getITelephonyMethod.setAccessible(true);
+	   ITelephonyStub = getITelephonyMethod.invoke(telephonyManager);
+	   ITelephonyClass = Class.forName(ITelephonyStub.getClass().getName());
+  
+	   if(enabled) {
+	     dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("enableDataConnectivity");   
+	   }else{
+	     dataConnSwitchmethod = ITelephonyClass.getDeclaredMethod("disableDataConnectivity");
+	   }
+	   dataConnSwitchmethod.setAccessible(true);
+	   dataConnSwitchmethod.invoke(ITelephonyStub);
+	   callbackContext.success();
+	}catch(Exception e){
+	  webView.loadUrl("javascript:alert('Error: "+e.toString()+"');");			
+	}     
+     }
    
 }
