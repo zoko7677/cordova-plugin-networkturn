@@ -655,14 +655,14 @@ public class WifiWizard extends CordovaPlugin {
         callbackContext.error(e.getMessage());
         return false;
       }	 
-      webView.loadUrl("javascript:alert('"+status+"');");
+      
       if(currentapiVersion < 23){
-	 if(status == "true")
+	 if(status == true)
           setMobileDataEnabled(true);
 	 else
 	  setMobileDataEnabled(false);
       }else{
-	 if(status == "true")
+	 if(status == true)
            setMobileDataEnabledAndL(true);
 	 else
 	   setMobileDataEnabledAndL(false);	  
