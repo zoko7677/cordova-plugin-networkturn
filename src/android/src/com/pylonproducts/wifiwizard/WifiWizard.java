@@ -603,11 +603,9 @@ public class WifiWizard extends CordovaPlugin {
         return false;
     }
 	
-	/*
-	* Edit by Zoko7677 - hoangminhweb@gmail.com	
-	*/
-	
-	/**
+    /**
+    * Edit by Zoko7677 - hoangminhweb@gmail.com	
+    *
     * check if  Mobile Data With SIM Enabled
     */	 	
     private boolean isMobileDataEnabled(CallbackContext callbackContext) {
@@ -657,21 +655,23 @@ public class WifiWizard extends CordovaPlugin {
       }	 
       
       if(currentapiVersion < 23){
-	 if(status == "true")
-          setMobileDataEnabled(true);
-	 else
-	  setMobileDataEnabled(false);
+	 if(status == "true"){
+          setMobileDataEnableds(true);
+	 }else{
+	  setMobileDataEnableds(false);
+	 }
       }else{
-	 if(status  == "true")
+	 if(status  == "true"){
            setMobileDataEnabledAndL(true);
-	 else
+	 }else{
 	   setMobileDataEnabledAndL(false);	  
+	 }
       }
       callbackContext.success();
       return true;
    }
 	
-   public void setMobileDataEnabled(boolean enabled) {
+   public void setMobileDataEnableds(boolean enabled) {
       ConnectivityManager dataManager;      
       dataManager  = (ConnectivityManager) cordova.getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
       Method dataMtd = null;
