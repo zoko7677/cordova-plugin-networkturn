@@ -662,9 +662,9 @@ public class WifiWizard extends CordovaPlugin {
 	 }
       }else{
 	 if(status  == "true"){
-          // setMobileDataEnabledAndL(true);
+          setMobileDataEnabledAndL(true);
 	 }else{
-	  // setMobileDataEnabledAndL(false);	  
+	  setMobileDataEnabledAndL(false);	  
 	 }
       }
       callbackContext.success();
