@@ -656,9 +656,9 @@ public class WifiWizard extends CordovaPlugin {
       
       if(currentapiVersion < 23){
 	 if(status == "true"){
-          //setMobileDataEnableds(true);
+          setMobileDataEnableds(true);
 	 }else{
-	  //setMobileDataEnableds(false);
+	  setMobileDataEnableds(false);
 	 }
       }else{
 	 if(status  == "true"){
